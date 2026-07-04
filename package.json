@@ -1,0 +1,10 @@
+{
+  "name": "first-pr-demo",
+  "version": "1.0.0",
+  "description": "A tiny collection of string utility functions, used as a playground for practicing Git and GitHub pull request workflows.",
+  "main": "src/stringUtils.js",
+  "scripts": {
+    "test": "node test/stringUtils.test.js"
+  },
+  "license": "MIT"
+}
