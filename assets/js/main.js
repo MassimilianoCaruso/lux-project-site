@@ -26,6 +26,45 @@
     });
   }
 
+  // Hero scroll sequence: the house grows from the bottom while the
+  // section stays pinned, then scrolls away normally with the rest of
+  // the hero as the "Chi Siamo" section rises up to take its place.
+  var hero = document.getElementById("hero");
+  var heroPin = hero && hero.querySelector(".hero3__pin");
+  var heroHouse = hero && hero.querySelector(".hero3__house");
+  var heroContent = hero && hero.querySelector(".hero3__content");
+  var heroReduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  if (hero && heroPin && heroHouse && heroContent && !heroReduceMotion) {
+    var heroTicking = false;
+
+    var heroClamp01 = function (v) {
+      return Math.min(Math.max(v, 0), 1);
+    };
+
+    var updateHeroScroll = function () {
+      var scrollable = hero.offsetHeight - heroPin.offsetHeight;
+      var rectTop = -hero.getBoundingClientRect().top;
+
+      var growProgress = scrollable > 0 ? heroClamp01(rectTop / scrollable) : 0;
+      var houseScale = 1.3 + growProgress * 0.7;
+      heroHouse.style.transform = "translateX(-50%) scale(" + houseScale + ")";
+
+      heroTicking = false;
+    };
+    document.addEventListener(
+      "scroll",
+      function () {
+        if (!heroTicking) {
+          window.requestAnimationFrame(updateHeroScroll);
+          heroTicking = true;
+        }
+      },
+      { passive: true }
+    );
+    updateHeroScroll();
+  }
+
   // Scroll reveal
   var revealEls = document.querySelectorAll(".reveal");
   if ("IntersectionObserver" in window && revealEls.length) {
