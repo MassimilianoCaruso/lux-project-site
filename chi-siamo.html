@@ -7,15 +7,17 @@
 <meta name="description" content="Scopri la filosofia di Lux Project: qualità, cura dei dettagli e materiali selezionati per case pensate per durare nel tempo.">
 <link rel="icon" type="image/png" href="assets/img/logo/favicon-64.png">
 <link rel="stylesheet" href="assets/css/style.css">
+<link rel="stylesheet" href="assets/vendor/cookieconsent/cookieconsent.css">
+<link rel="stylesheet" href="assets/css/cookie-consent-theme.css">
 </head>
 <body>
 <a class="skip-link" href="#main">Vai al contenuto principale</a>
 
 <header class="site-header">
   <div class="container site-header__bar">
+    <div class="header-center">
     <a class="brand" href="index.html">
       <img src="assets/img/logo/logo-160.png" alt="Lux Project" width="42" height="63">
-      <span>Lux Project</span>
     </a>
     <nav class="main-nav" aria-label="Navigazione principale">
       <ul>
@@ -27,6 +29,7 @@
         <li><a href="contatti.html">Contatti</a></li>
       </ul>
     </nav>
+    </div>
     <div class="header-actions">
       <a class="header-phone" href="tel:+3908117678145">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L14 13l5 2v4a2 2 0 0 1-2 2A15 15 0 0 1 4 6a2 2 0 0 1 2-2z"/></svg>
@@ -51,7 +54,7 @@
 
 <main id="main">
 
-  <section class="page-hero" style="background-image:url('assets/img/chi-siamo/chi-siamo-2.webp');">
+  <section class="page-hero" style="background-image:url('assets/img/chi-siamo/chi-siamo-3.webp');">
     <div class="container page-hero__content">
       <p class="breadcrumb"><a href="index.html">Home</a> / Chi Siamo</p>
       <h1>Ti diamo il benvenuto in Lux Project</h1>
@@ -66,9 +69,8 @@
         </div>
         <div>
           <span class="eyebrow split__eyebrow">La nostra filosofia</span>
-          <h2>Crediamo che acquistare casa significhi fare una scelta che durerà per tutta la vita.</h2>
-          <p>Per questo ogni nostro progetto nasce dalla ricerca dell'eccellenza, dall'attenzione ai dettagli e dall'utilizzo di materiali selezionati.</p>
-          <p>Non costruiamo semplicemente immobili. Realizziamo abitazioni pensate per offrire qualità, comfort e valore nel tempo.</p>
+          <h2>Crediamo che acquistare casa significhi fare una scelta che <strong>durerà per tutta la vita.</strong></h2>
+          <p>Per questo ogni nostro progetto nasce dalla ricerca dell'<strong>eccellenza</strong>, dall'attenzione ai <strong>dettagli</strong> e dall'utilizzo di <strong>materiali selezionati.</strong></p>
         </div>
       </div>
     </div>
@@ -78,7 +80,7 @@
     <div class="container">
       <div class="section-head reveal">
         <span class="eyebrow">Costruiamo valore</span>
-        <h2>Ogni edificio è progettato per migliorare il modo di vivere delle persone</h2>
+        <h2>Ogni edificio è progettato per migliorare il modo di vivere delle persone.</h2>
         <p style="color:rgba(250,246,238,0.75);">Con ambienti luminosi, spazi funzionali e soluzioni capaci di durare nel tempo.</p>
       </div>
     </div>
@@ -92,8 +94,8 @@
         </div>
         <div>
           <span class="eyebrow split__eyebrow">Una scelta che guarda avanti</span>
-          <h2>Scegliere Lux Project significa investire in una casa costruita con criteri moderni</h2>
-          <p>Attenzione all'ambiente e qualità senza compromessi: sono i due principi che guidano ogni nostra decisione, dalla scelta dei materiali alla cura degli spazi comuni.</p>
+          <h2>Scegliere Lux Project significa investire in una casa costruita con <strong>criteri moderni.</strong></h2>
+          <p><em>Attenzione all'ambiente e qualità senza compromessi:</em> sono i due principi che guidano ogni nostra decisione, dalla scelta dei materiali alla cura degli spazi comuni.</p>
           <div class="section-foot">
             <a class="link-arrow" href="caratteristiche-costruttive.html">
               Scopri le caratteristiche costruttive
@@ -108,7 +110,7 @@
   <section class="section section--alt cta-banner">
     <div class="container">
       <span class="eyebrow">Non costruiamo semplicemente edifici</span>
-      <h2 style="color:var(--color-ink); margin-top:var(--space-2);">Realizziamo spazi destinati ad accogliere il tuo futuro</h2>
+      <h2 style="color:var(--color-ink); margin-top:var(--space-2);">Realizziamo spazi destinati ad <strong>accogliere tuo futuro</strong></h2>
       <p style="color:var(--color-ink-soft);">Qualità, eleganza e valore che durano nel tempo.</p>
       <div class="cta-banner__actions">
         <a class="btn btn-primary" href="progetti-realizzati.html">Scopri i progetti</a>
@@ -154,6 +156,14 @@
           <li><a href="contatti.html">Contattaci &rarr;</a></li>
         </ul>
       </div>
+      <div class="footer-col">
+        <h4>Legale</h4>
+        <ul>
+          <li><a href="privacy-policy.html">Privacy Policy</a></li>
+          <li><a href="cookie-policy.html">Cookie Policy</a></li>
+          <li><button type="button" class="footer-link-btn" data-cc="show-preferencesModal">Preferenze Cookie</button></li>
+        </ul>
+      </div>
     </div>
     <div class="footer-bottom">
       <span>&copy; 2026 Lux Project. Tutti i diritti riservati.</span>
@@ -163,5 +173,7 @@
 </footer>
 
 <script src="assets/js/main.js"></script>
+<script src="assets/vendor/cookieconsent/cookieconsent.umd.js"></script>
+<script src="assets/js/cookie-consent-config.js"></script>
 </body>
 </html>

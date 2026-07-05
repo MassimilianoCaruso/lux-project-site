@@ -7,15 +7,17 @@
 <meta name="description" content="Contatta Lux Project: telefono, email o vieni a trovarci a Mugnano di Napoli. Compila il modulo per essere ricontattato.">
 <link rel="icon" type="image/png" href="assets/img/logo/favicon-64.png">
 <link rel="stylesheet" href="assets/css/style.css">
+<link rel="stylesheet" href="assets/vendor/cookieconsent/cookieconsent.css">
+<link rel="stylesheet" href="assets/css/cookie-consent-theme.css">
 </head>
 <body>
 <a class="skip-link" href="#main">Vai al contenuto principale</a>
 
 <header class="site-header">
   <div class="container site-header__bar">
+    <div class="header-center">
     <a class="brand" href="index.html">
       <img src="assets/img/logo/logo-160.png" alt="Lux Project" width="42" height="63">
-      <span>Lux Project</span>
     </a>
     <nav class="main-nav" aria-label="Navigazione principale">
       <ul>
@@ -27,6 +29,7 @@
         <li><a class="is-active" href="contatti.html">Contatti</a></li>
       </ul>
     </nav>
+    </div>
     <div class="header-actions">
       <a class="header-phone" href="tel:+3908117678145">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L14 13l5 2v4a2 2 0 0 1-2 2A15 15 0 0 1 4 6a2 2 0 0 1 2-2z"/></svg>
@@ -82,10 +85,10 @@
               </div>
             </div>
             <div class="contact-info-item">
-              <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="4"/><path d="M8 7v10M16 7v10M8 12h8"/></svg></div>
+              <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1"/></svg></div>
               <div>
                 <h3>Instagram</h3>
-                <a href="https://instagram.com" target="_blank" rel="noopener">Scrivici un DM</a>
+                <a href="https://www.instagram.com/luxprojectsrl/" target="_blank" rel="noopener">Scrivici un DM</a>
               </div>
             </div>
             <div class="contact-info-item">
@@ -155,6 +158,10 @@
                 <label for="c-message">Messaggio</label>
                 <textarea id="c-message" name="messaggio" rows="4" placeholder="Raccontaci cosa stai cercando..."></textarea>
               </div>
+              <label class="field-checkbox">
+                <input type="checkbox" name="privacy_consent" required>
+                <span>Ho letto e accetto la <a href="privacy-policy.html" target="_blank" rel="noopener">Privacy Policy</a>. <span class="req">*</span></span>
+              </label>
               <button class="btn btn-primary" type="submit">Invia richiesta</button>
               <p class="form-status" role="status"></p>
               <p class="form-note">Rispondiamo entro 1-2 giorni lavorativi. I tuoi dati saranno trattati solo per ricontattarti.</p>
@@ -202,6 +209,14 @@
           <li><a href="contatti.html">Contattaci &rarr;</a></li>
         </ul>
       </div>
+      <div class="footer-col">
+        <h4>Legale</h4>
+        <ul>
+          <li><a href="privacy-policy.html">Privacy Policy</a></li>
+          <li><a href="cookie-policy.html">Cookie Policy</a></li>
+          <li><button type="button" class="footer-link-btn" data-cc="show-preferencesModal">Preferenze Cookie</button></li>
+        </ul>
+      </div>
     </div>
     <div class="footer-bottom">
       <span>&copy; 2026 Lux Project. Tutti i diritti riservati.</span>
@@ -211,5 +226,7 @@
 </footer>
 
 <script src="assets/js/main.js"></script>
+<script src="assets/vendor/cookieconsent/cookieconsent.umd.js"></script>
+<script src="assets/js/cookie-consent-config.js"></script>
 </body>
 </html>

@@ -7,15 +7,17 @@
 <meta name="description" content="Materiali selezionati, efficienza energetica, domotica e attenzione ai dettagli: scopri come costruiamo le case Lux Project.">
 <link rel="icon" type="image/png" href="assets/img/logo/favicon-64.png">
 <link rel="stylesheet" href="assets/css/style.css">
+<link rel="stylesheet" href="assets/vendor/cookieconsent/cookieconsent.css">
+<link rel="stylesheet" href="assets/css/cookie-consent-theme.css">
 </head>
 <body>
 <a class="skip-link" href="#main">Vai al contenuto principale</a>
 
 <header class="site-header">
   <div class="container site-header__bar">
+    <div class="header-center">
     <a class="brand" href="index.html">
       <img src="assets/img/logo/logo-160.png" alt="Lux Project" width="42" height="63">
-      <span>Lux Project</span>
     </a>
     <nav class="main-nav" aria-label="Navigazione principale">
       <ul>
@@ -27,6 +29,7 @@
         <li><a href="contatti.html">Contatti</a></li>
       </ul>
     </nav>
+    </div>
     <div class="header-actions">
       <a class="header-phone" href="tel:+3908117678145">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L14 13l5 2v4a2 2 0 0 1-2 2A15 15 0 0 1 4 6a2 2 0 0 1 2-2z"/></svg>
@@ -60,47 +63,69 @@
 
   <section class="section">
     <div class="container">
-      <div class="section-head reveal">
-        <span class="eyebrow">Le nostre 7 storie di qualità</span>
-        <h2>Ogni dettaglio ha uno scopo</h2>
-        <p>Ogni progetto Lux Project prende forma attraverso una progettazione accurata, materiali selezionati e tecnologie costruttive all'avanguardia.</p>
-      </div>
-
-      <div class="reveal">
-        <div class="story-block">
-          <span class="story-block__num">01</span>
-          <h3>La qualità nasce dalle fondamenta</h3>
-          <p>Ogni progetto prende forma attraverso una progettazione accurata, materiali selezionati e tecnologie costruttive all'avanguardia.</p>
+      <div class="split split--story reveal">
+        <div class="split__content">
+          <span class="eyebrow split__eyebrow">Le nostre 7 storie di qualità</span>
+          <h2>Ogni dettaglio ha uno scopo</h2>
+          <p>Ogni progetto Lux Project prende forma attraverso una progettazione accurata, materiali selezionati e tecnologie costruttive all'avanguardia.</p>
         </div>
-        <div class="story-block">
-          <span class="story-block__num">02</span>
-          <h3>Materiali selezionati</h3>
-          <p>Scegliamo esclusivamente materiali in grado di garantire affidabilità nel tempo, elevate prestazioni, eleganza e cura estetica, massima durata. Legno, travertino, ceramiche di pregio e finiture di alta qualità.</p>
-        </div>
-        <div class="story-block">
-          <span class="story-block__num">03</span>
-          <h3>Tecnologia al servizio del comfort</h3>
-          <p>Le nostre costruzioni integrano tecniche costruttive evolute, domotica intelligente e isolamento termo-acustico avanzato, per offrirti una casa più confortevole, sicura ed efficiente.</p>
-        </div>
-        <div class="story-block">
-          <span class="story-block__num">04</span>
-          <h3>La differenza è nei dettagli</h3>
-          <p>Ogni ambiente viene rifinito con la massima attenzione. Materiali, proporzioni e finiture sono studiati per creare spazi eleganti, funzionali e destinati a durare nel tempo.</p>
-        </div>
-        <div class="story-block">
-          <span class="story-block__num">05</span>
-          <h3>Costruire bene significa costruire per il futuro</h3>
-          <p>Progettiamo edifici pensati per offrire comfort, efficienza e rispetto per l'ambiente: minori dispersioni termiche, elevato isolamento termo-acustico e consumi energetici ridotti, per il benessere abitativo in ogni stagione.</p>
-        </div>
-        <div class="story-block">
-          <span class="story-block__num">06</span>
-          <h3>Una casa che parla di te</h3>
-          <p>Durante la costruzione è possibile personalizzare numerosi aspetti dell'abitazione: distribuzione degli ambienti, materiali e finiture, pavimenti e rivestimenti, dettagli e soluzioni personalizzate.</p>
-        </div>
-        <div class="story-block">
-          <span class="story-block__num">07</span>
-          <h3>Non costruiamo semplicemente edifici</h3>
-          <p>Realizziamo spazi destinati ad accogliere il futuro di chi li vivrà. Lux Project: qualità, eleganza e valore che durano nel tempo.</p>
+        <div class="split__media">
+          <div class="story-stack" data-story-stack>
+            <div class="story-stack__stage">
+              <button type="button" class="story-stack__card" data-story-index="0">
+                <span class="story-stack__num">01</span>
+                <h3>La qualità nasce dalle fondamenta</h3>
+                <p>Ogni progetto prende forma attraverso una progettazione accurata, materiali selezionati e tecnologie costruttive all'avanguardia.</p>
+              </button>
+              <button type="button" class="story-stack__card" data-story-index="1">
+                <span class="story-stack__num">02</span>
+                <h3>Materiali selezionati</h3>
+                <p>Scegliamo esclusivamente materiali in grado di garantire affidabilità nel tempo, elevate prestazioni, eleganza e cura estetica, massima durata. Legno, travertino, ceramiche di pregio e finiture di alta qualità.</p>
+              </button>
+              <button type="button" class="story-stack__card" data-story-index="2">
+                <span class="story-stack__num">03</span>
+                <h3>Tecnologia al servizio del comfort</h3>
+                <p>Le nostre costruzioni integrano tecniche costruttive evolute, domotica intelligente e isolamento termo-acustico avanzato, per offrirti una casa più confortevole, sicura ed efficiente.</p>
+              </button>
+              <button type="button" class="story-stack__card" data-story-index="3">
+                <span class="story-stack__num">04</span>
+                <h3>La differenza è nei dettagli</h3>
+                <p>Ogni ambiente viene rifinito con la massima attenzione. Materiali, proporzioni e finiture sono studiati per creare spazi eleganti, funzionali e destinati a durare nel tempo.</p>
+              </button>
+              <button type="button" class="story-stack__card" data-story-index="4">
+                <span class="story-stack__num">05</span>
+                <h3>Costruire bene significa costruire per il futuro</h3>
+                <p>Progettiamo edifici pensati per offrire comfort, efficienza e rispetto per l'ambiente: minori dispersioni termiche, elevato isolamento termo-acustico e consumi energetici ridotti, per il benessere abitativo in ogni stagione.</p>
+              </button>
+              <button type="button" class="story-stack__card" data-story-index="5">
+                <span class="story-stack__num">06</span>
+                <h3>Una casa che parla di te</h3>
+                <p>Durante la costruzione è possibile personalizzare numerosi aspetti dell'abitazione: distribuzione degli ambienti, materiali e finiture, pavimenti e rivestimenti, dettagli e soluzioni personalizzate.</p>
+              </button>
+              <button type="button" class="story-stack__card" data-story-index="6">
+                <span class="story-stack__num">07</span>
+                <h3>Non costruiamo semplicemente edifici</h3>
+                <p>Realizziamo spazi destinati ad accogliere il futuro di chi li vivrà. Lux Project: qualità, eleganza e valore che durano nel tempo.</p>
+              </button>
+            </div>
+            <div class="story-stack__nav">
+              <button type="button" class="story-stack__arrow" data-story-prev aria-label="Punto precedente">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 6l-6 6 6 6"/></svg>
+              </button>
+              <div class="story-stack__dots" data-story-dots>
+                <button type="button" data-story-index="0" aria-label="Vai al punto 1"></button>
+                <button type="button" data-story-index="1" aria-label="Vai al punto 2"></button>
+                <button type="button" data-story-index="2" aria-label="Vai al punto 3"></button>
+                <button type="button" data-story-index="3" aria-label="Vai al punto 4"></button>
+                <button type="button" data-story-index="4" aria-label="Vai al punto 5"></button>
+                <button type="button" data-story-index="5" aria-label="Vai al punto 6"></button>
+                <button type="button" data-story-index="6" aria-label="Vai al punto 7"></button>
+              </div>
+              <button type="button" class="story-stack__arrow" data-story-next aria-label="Punto successivo">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg>
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -191,6 +216,14 @@
           <li><a href="contatti.html">Contattaci &rarr;</a></li>
         </ul>
       </div>
+      <div class="footer-col">
+        <h4>Legale</h4>
+        <ul>
+          <li><a href="privacy-policy.html">Privacy Policy</a></li>
+          <li><a href="cookie-policy.html">Cookie Policy</a></li>
+          <li><button type="button" class="footer-link-btn" data-cc="show-preferencesModal">Preferenze Cookie</button></li>
+        </ul>
+      </div>
     </div>
     <div class="footer-bottom">
       <span>&copy; 2026 Lux Project. Tutti i diritti riservati.</span>
@@ -200,5 +233,7 @@
 </footer>
 
 <script src="assets/js/main.js"></script>
+<script src="assets/vendor/cookieconsent/cookieconsent.umd.js"></script>
+<script src="assets/js/cookie-consent-config.js"></script>
 </body>
 </html>

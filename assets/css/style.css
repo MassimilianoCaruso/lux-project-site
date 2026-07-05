@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Lora:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&family=Montserrat:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&family=Sora:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap');
 
 /* ---------- Design tokens ---------- */
 :root {
@@ -13,8 +13,11 @@
   --color-gold-light: #d9bd85;
   --color-border: #e6dbc4;
 
-  --font-display: "Lora", "Georgia", serif;
-  --font-body: "Instrument Sans", "Segoe UI", sans-serif;
+  /* --font-display: "Lora", "Georgia", serif; */
+  /* --font-body: "Instrument Sans", "Segoe UI", sans-serif; */
+
+--font-display: "Inter", sans-serif;
+--font-body: "Plus Jakarta Sans", sans-serif;
 
   --space-1: 0.5rem;
   --space-2: 1rem;
@@ -258,9 +261,15 @@ button {
 .site-header__bar {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
   gap: var(--space-3);
   padding: 0.9rem 0;
+}
+
+.header-center {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
 }
 
 .brand {
@@ -271,7 +280,7 @@ button {
 }
 
 .brand img {
-  height: 42px;
+  height: 50px;
   width: auto;
 }
 
@@ -319,6 +328,7 @@ button {
   align-items: center;
   gap: var(--space-3);
   flex-shrink: 0;
+  margin-left: auto;
 }
 
 .header-phone {
@@ -356,6 +366,15 @@ button {
   .nav-toggle {
     display: none;
   }
+  .site-header__bar {
+    position: relative;
+  }
+  .header-center {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
 }
 
 .mobile-nav {
@@ -385,13 +404,7 @@ button {
 .hero3 {
   position: relative;
   background: var(--color-cream);
-  height: 130vh;
-}
-
-@media (min-width: 700px) {
-  .hero3 {
-    height: 165vh;
-  }
+  height: 165vh;
 }
 
 .hero3__pin {
@@ -486,6 +499,63 @@ button {
     animation: none;
     opacity: 1;
     transform: none;
+  }
+}
+
+/* ---------- Hero (mobile only) ----------
+   Independent from .hero3 (desktop): no scroll-pin/grow sequence, just
+   a simple on-load reveal plus a light parallax drift on the house
+   image while scrolling — lighter-weight and better suited to a short
+   mobile scroll distance. Hidden entirely at 768px and up. */
+.hero-mobile {
+  display: none;
+}
+
+@media (max-width: 767px) {
+  .hero3 {
+    display: none;
+  }
+
+  .hero-mobile {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    min-height: 100vh;
+    min-height: 100svh;
+    padding: 18vh var(--space-3) var(--space-4);
+    background: var(--color-cream);
+    overflow: hidden;
+    text-align: center;
+  }
+
+  .hero-mobile__content {
+    position: relative;
+    z-index: 2;
+  }
+
+  .hero-mobile__title {
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: clamp(1.7rem, 8vw, 2.3rem);
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+  }
+
+  .hero-mobile__media {
+    position: relative;
+    flex: 1;
+    margin-top: var(--space-4);
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    pointer-events: none;
+  }
+
+  .hero-mobile__house {
+    width: 80%;
+    max-width: 320px;
+    height: auto;
+    will-change: transform;
   }
 }
 
@@ -613,7 +683,7 @@ button {
   display: block;
   border-radius: var(--radius);
   overflow: hidden;
-  aspect-ratio: 4 / 5;
+  height: clamp(26rem, 72vh, 48rem);
   color: var(--color-white);
 }
 
@@ -696,6 +766,28 @@ button {
 #progetti-futuri .project-card {
   width: 100%;
   max-width: 420px;
+}
+
+/* Accordion project row (Progetti realizzati, Lavori in corso): hovering
+   a card grows it while the sibling compresses, row height stays fixed
+   so only the width redistributes between them. */
+@media (min-width: 720px) and (hover: hover) and (pointer: fine) {
+  .accordion-row {
+    display: flex;
+  }
+
+  .accordion-row .project-card {
+    flex: 1 1 0%;
+    transition: flex-grow 550ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .accordion-row .project-card:hover {
+    flex-grow: 1.55;
+  }
+
+  .accordion-row:hover .project-card:not(:hover) {
+    flex-grow: 0.65;
+  }
 }
 
 /* Gallery */
@@ -820,6 +912,13 @@ button {
   .split--reverse .split__media {
     order: 2;
   }
+
+  /* Personalizza la tua casa (home): the image column takes slightly
+     more room than the text column, ~4.5cm wider than the shared
+     .split--reverse ratio used elsewhere. */
+  #personalizza .split--reverse {
+    grid-template-columns: 1fr minmax(0, calc(52% + 4.5cm));
+  }
 }
 
 .split__media {
@@ -881,6 +980,33 @@ button {
   color: var(--color-ink-soft);
 }
 
+/* Story stack split (Caratteristiche costruttive): the fan needs ~870px
+   of unobstructed width to show all cards at full spread, so it keeps
+   the single-column layout well past the standard .split breakpoint and
+   only splits into two columns once there's room to spare. */
+
+/* .split__media normally shrink-wraps its content and self-centers
+   (via margin:0 auto, sized for an <img>); the story-stack has no
+   intrinsic width of its own, so force the wrapper to fill all the
+   space it's given at every breakpoint, or the fan gets clipped. */
+.split--story .split__media {
+  width: 100%;
+  margin: 0;
+}
+
+@media (min-width: 900px) {
+  .split--story {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (min-width: 1300px) {
+  .split--story {
+    grid-template-columns: minmax(220px, 22%) 1fr;
+    gap: var(--space-4);
+  }
+}
+
 .check-list li {
   display: flex;
   align-items: flex-start;
@@ -897,32 +1023,167 @@ button {
   color: var(--color-gold);
 }
 
-/* ---------- Story blocks (Caratteristiche costruttive) ---------- */
-.story-block {
-  padding: var(--space-4) 0;
-  border-top: 1px solid var(--color-border);
+/* ---------- Legal pages (Privacy Policy, Cookie Policy) ---------- */
+.legal-content {
+  max-width: 760px;
 }
 
-.story-block:first-of-type {
-  border-top: none;
+.legal-lead {
+  font-size: 1.05rem;
+  color: var(--color-ink-soft);
 }
 
-.story-block__num {
+.legal-content h2 {
+  margin-top: var(--space-5);
+  font-size: 1.3rem;
+}
+
+.legal-content h2:first-of-type {
+  margin-top: var(--space-4);
+}
+
+.legal-content p {
+  margin-top: var(--space-2);
+  color: var(--color-ink-soft);
+}
+
+.legal-content .check-list {
+  margin-top: var(--space-2);
+}
+
+.legal-updated {
+  margin-top: var(--space-4);
+  font-size: 0.85rem;
+  color: var(--color-ink-faint);
+  font-style: italic;
+}
+
+/* ---------- Story stack (Caratteristiche costruttive) ----------
+   A fanned stack of cards: the active one sits front-and-center,
+   the rest fan out behind it. Positioning (transform/opacity/z-index)
+   is computed in JS per active index; CSS only owns the transition. */
+.story-stack {
+  --story-card-w: 320px;
+  --story-card-h: 380px;
+}
+
+.story-stack__stage {
+  position: relative;
+  height: calc(var(--story-card-h) + 60px);
+  overflow: hidden;
+}
+
+.story-stack__card {
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: var(--story-card-w);
+  height: var(--story-card-h);
+  padding: var(--space-4);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  text-align: left;
+  font: inherit;
+  color: inherit;
+  background: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: calc(var(--radius) * 3);
+  box-shadow: 0 20px 45px rgba(33, 28, 21, 0.12);
+  cursor: pointer;
+  transition: transform 550ms cubic-bezier(0.22, 1, 0.36, 1), opacity 450ms ease, box-shadow 400ms ease, border-color 400ms ease;
+}
+
+.story-stack__card.is-active {
+  cursor: default;
+  box-shadow: 0 30px 60px rgba(33, 28, 21, 0.18);
+  border-color: var(--color-gold-light);
+}
+
+.story-stack__card:not(.is-active) p {
+  display: none;
+}
+
+.story-stack__num {
   font-family: var(--font-display);
-  font-size: 0.95rem;
+  font-size: 1rem;
   color: var(--color-gold-deep);
   font-style: italic;
 }
 
-.story-block h3 {
-  margin-top: 0.4rem;
-  font-size: 1.5rem;
+.story-stack__card h3 {
+  margin-top: 0.5rem;
+  font-size: 1.05rem;
+  line-height: 1.25;
 }
 
-.story-block p {
+.story-stack__card p {
   margin-top: var(--space-2);
   color: var(--color-ink-soft);
-  max-width: 640px;
+  font-size: 0.85rem;
+  line-height: 1.45;
+}
+
+.story-stack__nav {
+  margin-top: var(--space-4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-3);
+}
+
+.story-stack__arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: 1px solid var(--color-gold-light);
+  background: var(--color-white);
+  color: var(--color-gold-deep);
+  flex-shrink: 0;
+  transition: background var(--transition), color var(--transition), border-color var(--transition);
+}
+
+.story-stack__arrow:hover {
+  background: var(--color-gold);
+  color: var(--color-white);
+  border-color: var(--color-gold);
+}
+
+.story-stack__arrow svg {
+  width: 18px;
+  height: 18px;
+}
+
+.story-stack__dots {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.story-stack__dots button {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--color-border);
+  transition: background var(--transition), transform var(--transition);
+}
+
+.story-stack__dots button.is-active {
+  background: var(--color-gold);
+  transform: scale(1.4);
+}
+
+@media (max-width: 640px) {
+  .story-stack {
+    --story-card-w: 250px;
+    --story-card-h: 360px;
+  }
+
+  .story-stack__card {
+    padding: var(--space-3);
+  }
 }
 
 /* ---------- Contact ---------- */
@@ -1056,6 +1317,27 @@ button {
   height: 16px;
 }
 
+.field-checkbox {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6em;
+  font-size: 0.85rem;
+  color: var(--color-ink-soft);
+}
+
+.field-checkbox input {
+  accent-color: var(--color-gold-deep);
+  width: 16px;
+  height: 16px;
+  margin-top: 0.2em;
+  flex-shrink: 0;
+}
+
+.field-checkbox a {
+  color: var(--color-gold-deep);
+  text-decoration: underline;
+}
+
 .form-note {
   font-size: 0.8rem;
   color: var(--color-ink-faint);
@@ -1124,8 +1406,19 @@ button {
 
 @media (min-width: 800px) {
   .footer-grid {
-    grid-template-columns: 1.4fr 1fr 1fr;
+    grid-template-columns: 1.2fr 1fr 1fr 1fr;
   }
+}
+
+.footer-link-btn {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  text-align: left;
 }
 
 .footer-brand .brand span {

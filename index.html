@@ -7,15 +7,18 @@
 <meta name="description" content="Lux Project realizza case e appartamenti di qualità nell'area di Napoli: materiali selezionati, efficienza energetica e personalizzazione su misura.">
 <link rel="icon" type="image/png" href="assets/img/logo/favicon-64.png">
 <link rel="stylesheet" href="assets/css/style.css">
+<link rel="stylesheet" href="assets/vendor/cookieconsent/cookieconsent.css">
+<link rel="stylesheet" href="assets/css/cookie-consent-theme.css">
 </head>
 <body>
 <a class="skip-link" href="#main">Vai al contenuto principale</a>
 
 <header class="site-header">
   <div class="container site-header__bar">
+    <div class="header-center">
     <a class="brand" href="index.html">
-      <img src="assets/img/logo/logo-160.png" alt="Lux Project" width="42" height="63">
-      <span>Lux Project</span>
+      <img src="assets/img/logo/logo-160.png" alt="Lux Project" width="82" height="83">
+       <!-- <span>Lux Project</span> -->
     </a>
     <nav class="main-nav" aria-label="Navigazione principale">
       <ul>
@@ -27,6 +30,7 @@
         <li><a href="contatti.html">Contatti</a></li>
       </ul>
     </nav>
+    </div>
     <div class="header-actions">
       <a class="header-phone" href="tel:+3908117678145">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L14 13l5 2v4a2 2 0 0 1-2 2A15 15 0 0 1 4 6a2 2 0 0 1 2-2z"/></svg>
@@ -51,7 +55,7 @@
 
 <main id="main">
 
-  <!-- HERO -->
+  <!-- HERO (desktop) -->
   <section class="hero3" id="hero">
     <div class="hero3__pin">
       <div class="hero3__content">
@@ -60,6 +64,16 @@
       <div class="hero3__stage" aria-hidden="true">
         <img class="hero3__house" src="assets/img/hero/hero-house.png" alt="">
       </div>
+    </div>
+  </section>
+
+  <!-- HERO (mobile only, see CSS/JS "hero-mobile") -->
+  <section class="hero-mobile" id="hero-mobile">
+    <div class="hero-mobile__content reveal">
+      <h1 class="hero-mobile__title">Ti diamo il benvenuto in <strong>Lux Project</strong></h1>
+    </div>
+    <div class="hero-mobile__media reveal" aria-hidden="true">
+      <img class="hero-mobile__house" src="assets/img/hero/hero-house.png" alt="">
     </div>
   </section>
 
@@ -73,8 +87,7 @@
         <div class="split__content">
           <span class="eyebrow split__eyebrow">Chi siamo</span>
           <h2>La nostra filosofia</h2>
-          <p>Crediamo che acquistare casa significhi fare una scelta che durerà per tutta la vita. Per questo ogni nostro progetto nasce dalla ricerca dell'eccellenza, dall'attenzione ai dettagli e dall'utilizzo di materiali selezionati.</p>
-          <p>Non costruiamo semplicemente immobili: realizziamo abitazioni pensate per offrire qualità, comfort e valore nel tempo.</p>
+          <p>Crediamo che acquistare casa significhi fare una scelta che <strong>durerà per tutta la vita.</strong> Per questo ogni nostro progetto nasce dalla ricerca dell'eccellenza, dall'attenzione ai dettagli e dall'utilizzo di materiali selezionati.</p>
           <div class="section-foot">
             <a class="link-arrow" href="chi-siamo.html">
               Scopri di più
@@ -92,7 +105,7 @@
       <div class="section-head reveal">
         <span class="eyebrow">Caratteristiche costruttive</span>
         <h2>Ogni dettaglio ha uno scopo</h2>
-        <p>La qualità nasce dalle fondamenta: progettazione accurata, materiali selezionati e tecnologie costruttive all'avanguardia, per una casa più confortevole, sicura ed efficiente.</p>
+        <p><em>La qualità nasce dalle fondamenta:</em> progettazione accurata, materiali selezionati e tecnologie costruttive all'avanguardia, per una casa più confortevole, sicura ed efficiente.</p>
       </div>
       <div class="grid grid-4 reveal">
         <div class="feature-card">
@@ -169,7 +182,7 @@
         <h2>Consegnati con cura, vissuti con piacere</h2>
         <p>Alcune delle residenze che abbiamo già costruito e consegnato ai nostri clienti.</p>
       </div>
-      <div class="grid grid-2 reveal">
+      <div class="grid grid-2 accordion-row reveal">
         <a class="project-card" href="progetti-realizzati.html#arenaccia">
           <img src="assets/img/progetti/arenaccia/arenaccia-1.webp" alt="Residenza Arenaccia" loading="lazy" width="1600" height="2000">
           <div class="project-card__body">
@@ -204,7 +217,7 @@
         <h2>I cantieri attivi in questo momento</h2>
         <p>Progetti attualmente in costruzione, ancora in tempo per essere personalizzati.</p>
       </div>
-      <div class="grid grid-2 reveal">
+      <div class="grid grid-2 accordion-row reveal">
         <a class="project-card" href="lavori-in-corso.html#calvizzano">
           <img src="assets/img/progetti/calvizzano/calvizzano-2.webp" alt="Cantiere Calvizzano" loading="lazy" width="1600" height="2000">
           <div class="project-card__body">
@@ -283,6 +296,13 @@
             </div>
           </div>
           <div class="contact-info-item">
+            <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1"/></svg></div>
+            <div>
+              <h3>Instagram</h3>
+              <a href="https://www.instagram.com/luxprojectsrl/" target="_blank" rel="noopener">Scrivici un DM</a>
+            </div>
+          </div>
+          <div class="contact-info-item">
             <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s7-6.5 7-12A7 7 0 0 0 5 10c0 5.5 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></svg></div>
             <div>
               <h3>Indirizzo</h3>
@@ -324,6 +344,10 @@
             <label for="home-message">Messaggio</label>
             <textarea id="home-message" name="messaggio" rows="4" placeholder="Raccontaci cosa stai cercando..."></textarea>
           </div>
+          <label class="field-checkbox">
+            <input type="checkbox" name="privacy_consent" required>
+            <span>Ho letto e accetto la <a href="privacy-policy.html" target="_blank" rel="noopener">Privacy Policy</a>. <span class="req">*</span></span>
+          </label>
           <button class="btn btn-primary" type="submit">Invia richiesta</button>
           <p class="form-status" role="status"></p>
           <p class="form-note">Rispondiamo entro 1-2 giorni lavorativi. I tuoi dati saranno trattati solo per ricontattarti.</p>
@@ -344,7 +368,7 @@
         </a>
         <p>Qualità, eleganza e valore che durano nel tempo. Costruiamo case e appartamenti nell'area di Napoli.</p>
         <div class="footer-social">
-          <a href="https://instagram.com" aria-label="Instagram" target="_blank" rel="noopener">
+          <a href="https://www.instagram.com/luxprojectsrl/" aria-label="Instagram" target="_blank" rel="noopener">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1"/></svg>
           </a>
         </div>
@@ -369,6 +393,14 @@
           <li><a href="contatti.html">Contattaci &rarr;</a></li>
         </ul>
       </div>
+      <div class="footer-col">
+        <h4>Legale</h4>
+        <ul>
+          <li><a href="privacy-policy.html">Privacy Policy</a></li>
+          <li><a href="cookie-policy.html">Cookie Policy</a></li>
+          <li><button type="button" class="footer-link-btn" data-cc="show-preferencesModal">Preferenze Cookie</button></li>
+        </ul>
+      </div>
     </div>
     <div class="footer-bottom">
       <span>&copy; 2026 Lux Project. Tutti i diritti riservati.</span>
@@ -378,5 +410,7 @@
 </footer>
 
 <script src="assets/js/main.js"></script>
+<script src="assets/vendor/cookieconsent/cookieconsent.umd.js"></script>
+<script src="assets/js/cookie-consent-config.js"></script>
 </body>
 </html>

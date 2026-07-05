@@ -7,15 +7,17 @@
 <meta name="description" content="Le residenze Lux Project già costruite e consegnate: Arenaccia e Mugnano di Napoli.">
 <link rel="icon" type="image/png" href="assets/img/logo/favicon-64.png">
 <link rel="stylesheet" href="assets/css/style.css">
+<link rel="stylesheet" href="assets/vendor/cookieconsent/cookieconsent.css">
+<link rel="stylesheet" href="assets/css/cookie-consent-theme.css">
 </head>
 <body>
 <a class="skip-link" href="#main">Vai al contenuto principale</a>
 
 <header class="site-header">
   <div class="container site-header__bar">
+    <div class="header-center">
     <a class="brand" href="index.html">
       <img src="assets/img/logo/logo-160.png" alt="Lux Project" width="42" height="63">
-      <span>Lux Project</span>
     </a>
     <nav class="main-nav" aria-label="Navigazione principale">
       <ul>
@@ -27,6 +29,7 @@
         <li><a href="contatti.html">Contatti</a></li>
       </ul>
     </nav>
+    </div>
     <div class="header-actions">
       <a class="header-phone" href="tel:+3908117678145">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L14 13l5 2v4a2 2 0 0 1-2 2A15 15 0 0 1 4 6a2 2 0 0 1 2-2z"/></svg>
@@ -179,6 +182,14 @@
           <li><a href="contatti.html">Contattaci &rarr;</a></li>
         </ul>
       </div>
+      <div class="footer-col">
+        <h4>Legale</h4>
+        <ul>
+          <li><a href="privacy-policy.html">Privacy Policy</a></li>
+          <li><a href="cookie-policy.html">Cookie Policy</a></li>
+          <li><button type="button" class="footer-link-btn" data-cc="show-preferencesModal">Preferenze Cookie</button></li>
+        </ul>
+      </div>
     </div>
     <div class="footer-bottom">
       <span>&copy; 2026 Lux Project. Tutti i diritti riservati.</span>
@@ -188,5 +199,7 @@
 </footer>
 
 <script src="assets/js/main.js"></script>
+<script src="assets/vendor/cookieconsent/cookieconsent.umd.js"></script>
+<script src="assets/js/cookie-consent-config.js"></script>
 </body>
 </html>

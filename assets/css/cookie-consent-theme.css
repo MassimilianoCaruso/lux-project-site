@@ -1,0 +1,54 @@
+/* Restyles the vanilla-cookieconsent library (assets/vendor/cookieconsent)
+   to match the Lux Project design tokens defined in style.css, via the
+   library's own documented CSS custom properties. Loaded after both
+   style.css and cookieconsent.css. */
+:root {
+  --cc-font-family: var(--font-body);
+  --cc-modal-border-radius: var(--radius);
+  --cc-btn-border-radius: var(--radius);
+  --cc-modal-transition-duration: var(--transition);
+  --cc-z-index: 999999;
+
+  --cc-bg: var(--color-white);
+  --cc-primary-color: var(--color-ink);
+  --cc-secondary-color: var(--color-ink-soft);
+  --cc-link-color: var(--color-gold-deep);
+
+  --cc-btn-primary-bg: var(--color-gold);
+  --cc-btn-primary-color: var(--color-white);
+  --cc-btn-primary-border-color: var(--color-gold);
+  --cc-btn-primary-hover-bg: var(--color-gold-deep);
+  --cc-btn-primary-hover-color: var(--color-white);
+  --cc-btn-primary-hover-border-color: var(--color-gold-deep);
+
+  --cc-btn-secondary-bg: var(--color-cream-deep);
+  --cc-btn-secondary-color: var(--color-ink);
+  --cc-btn-secondary-border-color: var(--color-border);
+  --cc-btn-secondary-hover-bg: var(--color-border);
+  --cc-btn-secondary-hover-color: var(--color-ink);
+  --cc-btn-secondary-hover-border-color: var(--color-border);
+
+  --cc-toggle-on-bg: var(--color-gold);
+  --cc-toggle-off-bg: var(--color-ink-faint);
+  --cc-toggle-on-knob-bg: var(--color-white);
+  --cc-toggle-off-knob-bg: var(--color-white);
+  --cc-toggle-readonly-bg: var(--color-gold-light);
+  --cc-toggle-readonly-knob-bg: var(--color-white);
+
+  --cc-separator-border-color: var(--color-border);
+  --cc-cookie-category-block-bg: var(--color-cream);
+  --cc-cookie-category-block-border: var(--color-border);
+  --cc-cookie-category-block-hover-bg: var(--color-cream-deep);
+  --cc-cookie-category-block-hover-border: var(--color-gold-light);
+  --cc-cookie-category-expanded-block-bg: var(--color-cream);
+
+  --cc-footer-bg: var(--color-cream);
+  --cc-footer-color: var(--color-ink-soft);
+  --cc-footer-border-color: var(--color-border);
+  --cc-overlay-bg: rgba(33, 28, 21, 0.55);
+}
+
+#cc-main .cm,
+#cc-main .pm {
+  box-shadow: var(--shadow-soft);
+}

@@ -65,6 +65,41 @@
     updateHeroScroll();
   }
 
+  // Mobile-only hero (separate from desktop .hero3): no scroll-pin/grow,
+  // just a light parallax drift on the house image while scrolling. The
+  // text entrance is handled by the generic .reveal observer below.
+  var heroMobile = document.getElementById("hero-mobile");
+  var heroMobileHouse = heroMobile && heroMobile.querySelector(".hero-mobile__house");
+  var heroMobileReduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  if (heroMobile && heroMobileHouse && !heroMobileReduceMotion) {
+    var heroMobileTicking = false;
+
+    var heroMobileClamp = function (v, min, max) {
+      return Math.min(Math.max(v, min), max);
+    };
+
+    var updateHeroMobileParallax = function () {
+      if (window.innerWidth < 768) {
+        var rect = heroMobile.getBoundingClientRect();
+        var offset = heroMobileClamp(rect.top * 0.12, -50, 50);
+        heroMobileHouse.style.transform = "translateY(" + offset + "px)";
+      }
+      heroMobileTicking = false;
+    };
+    document.addEventListener(
+      "scroll",
+      function () {
+        if (!heroMobileTicking) {
+          window.requestAnimationFrame(updateHeroMobileParallax);
+          heroMobileTicking = true;
+        }
+      },
+      { passive: true }
+    );
+    updateHeroMobileParallax();
+  }
+
   // Scroll reveal
   var revealEls = document.querySelectorAll(".reveal");
   if ("IntersectionObserver" in window && revealEls.length) {
@@ -87,6 +122,117 @@
       el.classList.add("is-visible");
     });
   }
+
+  // Story stack (Caratteristiche costruttive): fanned card navigation
+  var storyStacks = document.querySelectorAll("[data-story-stack]");
+  storyStacks.forEach(function (stack) {
+    var stage = stack.querySelector(".story-stack__stage");
+    var cards = Array.prototype.slice.call(stack.querySelectorAll(".story-stack__card"));
+    var dots = Array.prototype.slice.call(stack.querySelectorAll("[data-story-dots] button"));
+    var prevBtn = stack.querySelector("[data-story-prev]");
+    var nextBtn = stack.querySelector("[data-story-next]");
+    var len = cards.length;
+    var active = 0;
+    var storyReduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    if (storyReduceMotion) {
+      cards.forEach(function (card) {
+        card.style.transitionDuration = "0ms";
+      });
+    }
+
+    function isSmallScreen() {
+      return window.matchMedia("(max-width: 640px)").matches;
+    }
+
+    function render() {
+      var maxOffset = isSmallScreen() ? 2 : 3;
+      var spreadDeg = storyReduceMotion ? 0 : isSmallScreen() ? 24 : 40;
+      var stepDeg = maxOffset > 0 ? spreadDeg / maxOffset : 0;
+      var spacing = isSmallScreen() ? 46 : 78;
+
+      cards.forEach(function (card, i) {
+        var offset = i - active;
+        var abs = Math.abs(offset);
+        var isActive = offset === 0;
+
+        card.classList.toggle("is-active", isActive);
+        card.setAttribute("aria-current", isActive ? "true" : "false");
+
+        if (abs > maxOffset) {
+          card.style.opacity = "0";
+          card.style.pointerEvents = "none";
+          return;
+        }
+
+        var rotate = offset * stepDeg;
+        var x = offset * spacing;
+        var y = isActive ? -18 : abs * 6;
+        var scale = isActive ? 1 : 1 - abs * 0.06;
+
+        card.style.pointerEvents = "";
+        card.style.zIndex = String(100 - abs);
+        card.style.opacity = isActive ? "1" : String(Math.max(0.55, 1 - abs * 0.18));
+        card.style.transform =
+          "translateX(-50%) translateX(" + x + "px) translateY(" + y + "px) rotate(" + rotate + "deg) scale(" + scale + ")";
+      });
+
+      dots.forEach(function (dot, i) {
+        dot.classList.toggle("is-active", i === active);
+      });
+    }
+
+    function goTo(index) {
+      active = ((index % len) + len) % len;
+      render();
+    }
+
+    cards.forEach(function (card, i) {
+      card.addEventListener("click", function () {
+        goTo(i);
+      });
+    });
+
+    dots.forEach(function (dot, i) {
+      dot.addEventListener("click", function () {
+        goTo(i);
+      });
+    });
+
+    if (prevBtn) {
+      prevBtn.addEventListener("click", function () {
+        goTo(active - 1);
+      });
+    }
+    if (nextBtn) {
+      nextBtn.addEventListener("click", function () {
+        goTo(active + 1);
+      });
+    }
+
+    stack.setAttribute("tabindex", "0");
+    stack.addEventListener("keydown", function (e) {
+      if (e.key === "ArrowLeft") goTo(active - 1);
+      if (e.key === "ArrowRight") goTo(active + 1);
+    });
+
+    var dragStartX = null;
+    stage.addEventListener("pointerdown", function (e) {
+      dragStartX = e.clientX;
+    });
+    stage.addEventListener("pointerup", function (e) {
+      if (dragStartX === null) return;
+      var delta = e.clientX - dragStartX;
+      if (Math.abs(delta) > 40) {
+        goTo(active + (delta < 0 ? 1 : -1));
+      }
+      dragStartX = null;
+    });
+
+    window.addEventListener("resize", render);
+
+    render();
+  });
 
   // Lightbox gallery
   var lightbox = document.querySelector("[data-lightbox]");
