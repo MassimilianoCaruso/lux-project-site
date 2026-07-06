@@ -10,7 +10,7 @@
 <link rel="stylesheet" href="assets/vendor/cookieconsent/cookieconsent.css">
 <link rel="stylesheet" href="assets/css/cookie-consent-theme.css">
 </head>
-<body>
+<body class="has-hero-overlay">
 <a class="skip-link" href="#main">Vai al contenuto principale</a>
 
 <header class="site-header">
@@ -36,7 +36,7 @@
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L14 13l5 2v4a2 2 0 0 1-2 2A15 15 0 0 1 4 6a2 2 0 0 1 2-2z"/></svg>
         +39 081 1767 8145
       </a>
-      <a class="btn btn-gold" href="contatti.html">Contattaci</a>
+      <a class="btn btn-primary" href="contatti.html">Contattaci</a>
       <button class="nav-toggle" aria-label="Apri il menu" aria-expanded="false">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
       </button>
@@ -55,25 +55,39 @@
 
 <main id="main">
 
-  <!-- HERO (desktop) -->
-  <section class="hero3" id="hero">
-    <div class="hero3__pin">
-      <div class="hero3__content">
-        <h1 class="hero3__title">Ti diamo il benvenuto in <strong>Lux Project</strong></h1>
-      </div>
-      <div class="hero3__stage" aria-hidden="true">
-        <img class="hero3__house" src="assets/img/hero/hero-house.png" alt="">
+  <!-- HERO (desktop, ≥768px) -->
+  <section class="hero-v2" id="hero">
+    <div class="hero-v2__media" aria-hidden="true">
+      <img src="assets/img/hero/hero-house-1.webp" alt="">
+    </div>
+    <div class="hero-v2__overlay" aria-hidden="true"></div>
+    <div class="hero-v2__fade" aria-hidden="true"></div>
+    <div class="container hero-v2__inner">
+      <div class="hero-v2__content">
+        <p class="hero-v2__eyebrow reveal-hero" data-hero-step="1">Qualità costruttiva &bull; Design contemporaneo</p>
+        <h1 class="hero-v2__title reveal-hero" data-hero-step="2">Design, comfort ed efficienza in perfetto equilibrio.</h1>
+        <div class="hero-v2__actions">
+          <a class="btn btn-primary reveal-hero" data-hero-step="3" href="progetti-realizzati.html">Scopri i nostri progetti</a>
+          <a class="btn btn-outline reveal-hero" data-hero-step="4" href="contatti.html">Richiedi informazioni</a>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- HERO (mobile only, see CSS/JS "hero-mobile") -->
-  <section class="hero-mobile" id="hero-mobile">
-    <div class="hero-mobile__content reveal">
-      <h1 class="hero-mobile__title">Ti diamo il benvenuto in <strong>Lux Project</strong></h1>
-    </div>
-    <div class="hero-mobile__media reveal" aria-hidden="true">
-      <img class="hero-mobile__house" src="assets/img/hero/hero-house.png" alt="">
+  <!-- HERO (mobile only, <768px) -->
+  <section class="hero-mobile-v2" id="hero-mobile">
+    <img class="hero-mobile-v2__bg" src="assets/img/hero/hero-house-1-mobile.webp" alt="">
+    <div class="hero-mobile-v2__fade" aria-hidden="true"></div>
+    <div class="hero-mobile-v2__content">
+      <p class="hero-mobile-v2__eyebrow reveal-hero" data-hero-step="1">Qualità costruttiva &bull; Design contemporaneo</p>
+      <h1 class="hero-mobile-v2__title reveal-hero" data-hero-step="2">Design, comfort ed efficienza in perfetto equilibrio.</h1>
+      <div class="hero-mobile-v2__actions">
+        <a class="btn btn-primary reveal-hero" data-hero-step="3" href="progetti-realizzati.html">Scopri i nostri progetti</a>
+        <a class="hero-mobile-v2__link reveal-hero" data-hero-step="4" href="contatti.html">
+          Richiedi informazioni
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+      </div>
     </div>
   </section>
 
@@ -348,7 +362,7 @@
             <input type="checkbox" name="privacy_consent" required>
             <span>Ho letto e accetto la <a href="privacy-policy.html" target="_blank" rel="noopener">Privacy Policy</a>. <span class="req">*</span></span>
           </label>
-          <button class="btn btn-primary" type="submit">Invia richiesta</button>
+          <button class="btn btn-outline" type="submit">Invia richiesta</button>
           <p class="form-status" role="status"></p>
           <p class="form-note">Rispondiamo entro 1-2 giorni lavorativi. I tuoi dati saranno trattati solo per ricontattarti.</p>
         </form>

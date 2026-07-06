@@ -156,7 +156,10 @@ button {
   margin-top: var(--space-4);
 }
 
-/* ---------- Buttons ---------- */
+/* ---------- Buttons ----------
+   One primary CTA per page (the header "Contattaci"): near-black fill,
+   soft lift on hover. Everything else is the gold-outline secondary
+   style, so the primary keeps its visual weight uncontested. */
 .btn {
   display: inline-flex;
   align-items: center;
@@ -166,7 +169,7 @@ button {
   font-weight: 600;
   font-size: 0.95rem;
   border: 1px solid transparent;
-  transition: background var(--transition), color var(--transition), border-color var(--transition), transform var(--transition);
+  transition: background var(--transition), color var(--transition), border-color var(--transition), transform var(--transition), box-shadow var(--transition);
   white-space: nowrap;
 }
 
@@ -177,40 +180,29 @@ button {
 .btn-primary {
   background: var(--color-ink);
   color: var(--color-cream);
+  box-shadow: var(--shadow-soft);
 }
 
 .btn-primary:hover {
   background: var(--color-gold-deep);
   color: var(--color-white);
+  transform: translateY(-2px);
+  box-shadow: 0 16px 32px rgba(33, 28, 21, 0.16);
 }
 
-.btn-gold {
-  background: var(--color-gold);
-  color: var(--color-white);
-}
-
-.btn-gold:hover {
-  background: var(--color-gold-deep);
+.btn-primary:active {
+  transform: translateY(0);
 }
 
 .btn-outline {
   background: transparent;
-  border-color: currentColor;
+  color: var(--color-gold-deep);
+  border-color: var(--color-gold);
 }
 
 .btn-outline:hover {
-  background: var(--color-ink);
-  color: var(--color-cream);
-  border-color: var(--color-ink);
-}
-
-.section--dark .btn-outline {
-  border-color: var(--color-gold-light);
-}
-
-.section--dark .btn-outline:hover {
   background: var(--color-gold);
-  color: var(--color-ink);
+  color: var(--color-white);
   border-color: var(--color-gold);
 }
 
@@ -256,6 +248,35 @@ button {
 .site-header.is-scrolled {
   border-color: var(--color-border);
   box-shadow: 0 4px 24px rgba(33, 28, 21, 0.06);
+}
+
+/* Pages with a full-screen photo hero (index.html): the header floats
+   transparently over the image, in the same fixed position at the very
+   top, and only gains its usual cream/blur background once scrolled. */
+body.has-hero-overlay .site-header {
+  position: fixed;
+  left: 0;
+  right: 0;
+  background: transparent;
+  backdrop-filter: none;
+  border-bottom-color: transparent;
+  transition: background var(--transition), backdrop-filter var(--transition), border-color var(--transition), box-shadow var(--transition);
+}
+
+body.has-hero-overlay .site-header.is-scrolled {
+  background: rgba(250, 246, 238, 0.9);
+  backdrop-filter: blur(10px);
+}
+
+body.has-hero-overlay .site-header:not(.is-scrolled) .main-nav a,
+body.has-hero-overlay .site-header:not(.is-scrolled) .header-phone,
+body.has-hero-overlay .site-header:not(.is-scrolled) .nav-toggle {
+  color: var(--color-white);
+}
+
+body.has-hero-overlay .site-header:not(.is-scrolled) .main-nav a.is-active,
+body.has-hero-overlay .site-header:not(.is-scrolled) .main-nav a:hover {
+  color: var(--color-gold-light);
 }
 
 .site-header__bar {
@@ -400,72 +421,14 @@ button {
   }
 }
 
-/* ---------- Hero ---------- */
-.hero3 {
-  position: relative;
-  background: var(--color-cream);
-  height: 165vh;
-}
-
-.hero3__pin {
-  position: sticky;
-  top: 0;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  overflow: hidden;
-}
-
-.hero3__content {
-  position: relative;
-  z-index: 3;
-  padding: 22vh var(--space-3) 0;
-  max-width: 95vw;
-  text-align: center;
-  will-change: opacity;
-}
-
-.hero3__title {
-  font-family: var(--font-body);
-  font-weight: 700;
-  font-size: clamp(1.1rem, 5.6vw, 3.6rem);
-  line-height: 1.05;
-  letter-spacing: -0.03em;
-  white-space: nowrap;
-}
-
-/* Stage: the house render grows from the bottom of the hero as the user
-   scrolls, then fades away as the Lux Project mark grows in its place. */
-.hero3__stage {
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  pointer-events: none;
-}
-
-.hero3__house {
-  position: absolute;
-  left: 50%;
-  bottom: 0;
-  height: 55vh;
-  width: auto;
-  max-height: 460px;
-  transform-origin: bottom center;
-  transform: translateX(-50%) scale(1.3);
-  opacity: 1;
-  will-change: opacity, transform;
-}
-
-.hero3__title {
-  opacity: 0;
-  animation: hero3-item-in 0.6s ease-out 0.25s forwards;
-}
-
-@keyframes hero3-item-in {
+/* ---------- Hero entrance animation (shared, desktop + mobile) ----------
+   Pure CSS, staggered by data-hero-step: eyebrow -> title -> primary
+   CTA -> secondary CTA. No scroll-jacking, hero is always above the
+   fold so this just plays once on load. */
+@keyframes hero-in {
   from {
     opacity: 0;
-    transform: translateY(20px);
+    transform: translateY(14px);
   }
   to {
     opacity: 1;
@@ -473,89 +436,220 @@ button {
   }
 }
 
+.reveal-hero {
+  opacity: 0;
+  animation: hero-in 480ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.reveal-hero[data-hero-step="1"] { animation-delay: 0ms; }
+.reveal-hero[data-hero-step="2"] { animation-delay: 140ms; }
+.reveal-hero[data-hero-step="3"] { animation-delay: 300ms; }
+.reveal-hero[data-hero-step="4"] { animation-delay: 440ms; }
+
 @media (prefers-reduced-motion: reduce) {
-  .hero3 {
-    height: auto;
-  }
-  .hero3__pin {
-    position: relative;
-    height: auto;
-    padding-bottom: var(--space-6);
-  }
-  .hero3__stage {
-    position: relative;
-    margin-top: var(--space-5);
-  }
-  .hero3__house {
-    position: relative;
-    left: auto;
-    bottom: auto;
-    margin: 0 auto;
-    animation: none;
-    opacity: 1;
-    transform: translateX(0) scale(1);
-  }
-  .hero3__title {
+  .reveal-hero {
     animation: none;
     opacity: 1;
     transform: none;
   }
 }
 
-/* ---------- Hero (mobile only) ----------
-   Independent from .hero3 (desktop): no scroll-pin/grow sequence, just
-   a simple on-load reveal plus a light parallax drift on the house
-   image while scrolling — lighter-weight and better suited to a short
-   mobile scroll distance. Hidden entirely at 768px and up. */
-.hero-mobile {
+/* ---------- Hero (desktop, >=768px) ----------
+   Full-bleed, full-screen photo hero: image is the section's own
+   background (100vw, no boxed frame), text overlays the left side,
+   header floats transparently on top until scrolled (see
+   body.has-hero-overlay .site-header below). */
+.hero-v2 {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .hero-v2 {
+    display: flex;
+    align-items: center;
+    position: relative;
+    min-height: 100vh;
+    min-height: 100svh;
+    overflow: hidden;
+    isolation: isolate;
+  }
+
+  .hero-v2__media {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+  }
+
+  .hero-v2__media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 66% 48%;
+  }
+
+  /* Very light darkening so the text stays readable without dulling
+     the photo's natural brightness and colour. */
+  .hero-v2__overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: rgba(0, 0, 0, 0.08);
+  }
+
+  /* Soft dissolve into the next section's background, so it reads as
+     emerging from the photo rather than a hard cut. */
+  .hero-v2__fade {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 2;
+    height: 26vh;
+    background: linear-gradient(to bottom, rgba(250, 246, 238, 0) 0%, var(--color-cream) 92%);
+    pointer-events: none;
+  }
+
+  .hero-v2__inner {
+    position: relative;
+    z-index: 3;
+    width: 100%;
+  }
+
+  .hero-v2__content {
+    max-width: 600px;
+  }
+
+  .hero-v2__eyebrow {
+    display: block;
+    font-family: var(--font-body);
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--color-gold-light);
+    margin-bottom: var(--space-3);
+  }
+
+  .hero-v2__title {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(2rem, 3.4vw, 3.2rem);
+    line-height: 1.15;
+    color: var(--color-white);
+    text-shadow: 0 2px 20px rgba(0, 0, 0, 0.22);
+    max-width: 600px;
+  }
+
+  .hero-v2__actions {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    flex-wrap: wrap;
+    margin-top: var(--space-4);
+  }
+
+  /* On the photo, the secondary CTA reads gold border / white text
+     (the sitewide .btn-outline is gold text, for use on light bg). */
+  .hero-v2 .btn-outline {
+    color: var(--color-white);
+  }
+}
+
+/* ---------- Hero (mobile only, <768px) ----------
+   Full-bleed portrait photo with a generous sky area reserved for the
+   content, anchored to the top so it never overlaps the house. */
+.hero-mobile-v2 {
   display: none;
 }
 
 @media (max-width: 767px) {
-  .hero3 {
+  .hero-v2 {
     display: none;
   }
 
-  .hero-mobile {
-    display: flex;
-    flex-direction: column;
+  .hero-mobile-v2 {
+    display: block;
     position: relative;
     min-height: 100vh;
     min-height: 100svh;
-    padding: 18vh var(--space-3) var(--space-4);
-    background: var(--color-cream);
     overflow: hidden;
-    text-align: center;
   }
 
-  .hero-mobile__content {
-    position: relative;
-    z-index: 2;
+  .hero-mobile-v2__bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
   }
 
-  .hero-mobile__title {
-    font-family: var(--font-body);
-    font-weight: 700;
-    font-size: clamp(1.7rem, 8vw, 2.3rem);
-    line-height: 1.15;
-    letter-spacing: -0.02em;
-  }
-
-  .hero-mobile__media {
-    position: relative;
-    flex: 1;
-    margin-top: var(--space-4);
-    display: flex;
-    align-items: flex-end;
-    justify-content: center;
+  /* Soft dissolve into the next section's background, so it reads as
+     emerging from the photo rather than a hard cut (same treatment as
+     the desktop hero's fade). */
+  .hero-mobile-v2__fade {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1;
+    height: 22vh;
+    background: linear-gradient(to bottom, rgba(250, 246, 238, 0) 0%, var(--color-cream) 92%);
     pointer-events: none;
   }
 
-  .hero-mobile__house {
-    width: 80%;
-    max-width: 320px;
-    height: auto;
-    will-change: transform;
+  .hero-mobile-v2__content {
+    position: relative;
+    z-index: 2;
+    padding: 90px 26px 0;
+  }
+
+  .hero-mobile-v2__eyebrow {
+    display: block;
+    font-family: var(--font-body);
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--color-gold-light);
+    margin-bottom: var(--space-2);
+  }
+
+  .hero-mobile-v2__title {
+    font-family: var(--font-display);
+    font-weight: 700;
+    color: var(--color-white);
+    font-size: clamp(1.6rem, 7.6vw, 2.1rem);
+    line-height: 1.05;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+  }
+
+  .hero-mobile-v2__actions {
+    margin-top: 32px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .hero-mobile-v2__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5em;
+    color: var(--color-white);
+    font-weight: 600;
+    font-size: 0.95rem;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+  }
+
+  .hero-mobile-v2__link svg {
+    width: 1em;
+    height: 1em;
+    transition: transform var(--transition);
+  }
+
+  .hero-mobile-v2__link:hover svg {
+    transform: translateX(4px);
   }
 }
 
@@ -961,8 +1055,8 @@ button {
   }
 
   .split__media--bleed-right img {
-    aspect-ratio: 16 / 10;
-    object-fit: cover;
+    aspect-ratio: auto;
+    object-fit: contain;
     border-radius: var(--radius) 0 0 var(--radius);
   }
 }
@@ -1522,6 +1616,348 @@ button {
   .reveal {
     opacity: 1;
     transform: none;
+  }
+}
+
+/* ---------- Legal pages (Privacy Policy, Cookie Policy) ----------
+   Editorial layout: sticky/scrollspy TOC + content cards. Reuses
+   existing components (.page-hero, .feature-card + .icon, .btn,
+   .reveal, .check-list) wherever possible; palette restricted to the
+   values below, per the page's own explicit design brief. */
+.legal-page {
+  --legal-bg: #f7f2ec;
+  background: var(--legal-bg);
+}
+
+.page-hero--legal h1 {
+  font-size: clamp(2.4rem, 5.4vw, 4.5rem);
+}
+
+.page-hero--legal .page-hero__subtitle {
+  margin-top: var(--space-2);
+  max-width: 620px;
+  font-size: 1.1rem;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.legal-layout {
+  display: grid;
+  gap: var(--space-4);
+}
+
+@media (min-width: 1000px) {
+  .legal-layout {
+    grid-template-columns: 220px minmax(0, 900px);
+    gap: var(--space-6);
+    align-items: start;
+  }
+}
+
+.legal-toc {
+  font-size: 0.88rem;
+}
+
+.legal-toc__label {
+  display: none;
+}
+
+.legal-toc nav > ul {
+  display: flex;
+  gap: var(--space-2);
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+
+.legal-toc nav > ul::-webkit-scrollbar {
+  display: none;
+}
+
+.legal-toc a {
+  display: block;
+  flex: 0 0 auto;
+  white-space: nowrap;
+  padding: 0.5em 1em;
+  border: 1px solid var(--color-border);
+  border-radius: 100px;
+  color: var(--color-ink-soft);
+  transition: color var(--transition), border-color var(--transition), background var(--transition);
+}
+
+.legal-toc a.is-active {
+  color: var(--color-ink);
+  border-color: var(--color-gold);
+  background: var(--color-white);
+}
+
+@media (min-width: 1000px) {
+  .legal-toc {
+    position: sticky;
+    top: calc(var(--space-3) + 84px);
+  }
+
+  .legal-toc__label {
+    display: block;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1rem;
+    color: var(--color-ink);
+    margin-bottom: var(--space-3);
+  }
+
+  .legal-toc nav > ul {
+    flex-direction: column;
+    overflow-x: visible;
+  }
+
+  .legal-toc a {
+    border: none;
+    border-left: 2px solid var(--color-border);
+    border-radius: 0;
+    padding: 0.4em 0 0.4em 1em;
+  }
+
+  .legal-toc a.is-active {
+    background: none;
+    border-left-color: var(--color-gold);
+  }
+}
+
+.legal-content {
+  min-width: 0;
+}
+
+.legal-card {
+  padding: var(--space-4);
+  box-shadow: 0 4px 24px rgba(33, 28, 21, 0.05);
+  margin-bottom: var(--space-4);
+}
+
+.legal-card:hover {
+  transform: none;
+}
+
+.legal-card h2 {
+  font-size: clamp(1.6rem, 2.6vw, 2.1rem);
+  margin-top: var(--space-2);
+}
+
+.legal-card p {
+  font-size: 1.125rem;
+  line-height: 1.75;
+  color: var(--color-ink-soft);
+  margin-top: var(--space-2);
+}
+
+.legal-card .check-list {
+  margin-top: var(--space-3);
+}
+
+.legal-card.reveal {
+  transform: translateY(10px);
+  transition: opacity 300ms ease, transform 300ms ease;
+}
+
+.legal-lead {
+  font-size: 1.15rem;
+  color: var(--color-ink-soft);
+  margin-bottom: var(--space-4);
+}
+
+/* Key facts (email, PEC, indirizzo, P.IVA) as small dedicated cards
+   instead of being buried in a paragraph. */
+.legal-facts {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-2);
+  margin-top: var(--space-3);
+}
+
+@media (min-width: 560px) {
+  .legal-facts {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.legal-fact {
+  background: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: var(--space-3);
+}
+
+.legal-fact__label {
+  display: block;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-gold-deep);
+  margin-bottom: 0.3rem;
+}
+
+.legal-fact a {
+  color: var(--color-ink);
+  font-weight: 600;
+}
+
+/* Info box for a single important point, lifted out of the paragraph
+   flow. Background is a light gold tint, so it stays inside the gold
+   accent family rather than introducing a new colour. */
+.legal-info-box {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  background: rgba(169, 129, 63, 0.07);
+  border: 1px solid rgba(169, 129, 63, 0.2);
+  border-radius: var(--radius);
+  padding: var(--space-3);
+  margin-top: var(--space-3);
+}
+
+.legal-info-box svg {
+  width: 22px;
+  height: 22px;
+  flex-shrink: 0;
+  margin-top: 0.1em;
+  color: var(--color-gold-deep);
+}
+
+.legal-info-box p {
+  margin: 0;
+  font-size: 1rem;
+  color: var(--color-ink-soft);
+}
+
+/* Vertical timeline (conservazione dei dati) */
+.legal-timeline {
+  list-style: none;
+  position: relative;
+  margin: var(--space-3) 0 0;
+  padding-left: 28px;
+}
+
+.legal-timeline::before {
+  content: "";
+  position: absolute;
+  left: 6px;
+  top: 6px;
+  bottom: 6px;
+  width: 1px;
+  background: var(--color-border);
+}
+
+.legal-timeline li {
+  position: relative;
+  padding-bottom: var(--space-3);
+}
+
+.legal-timeline li:last-child {
+  padding-bottom: 0;
+}
+
+.legal-timeline__dot {
+  position: absolute;
+  left: -28px;
+  top: 3px;
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  background: var(--color-white);
+  border: 2px solid var(--color-gold);
+}
+
+.legal-timeline h4 {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--color-ink);
+}
+
+.legal-timeline p {
+  margin-top: 0.2rem;
+  font-size: 0.95rem;
+  color: var(--color-ink-soft);
+}
+
+/* FAQ accordion */
+.legal-faq__item {
+  border-bottom: 1px solid var(--color-border);
+}
+
+.legal-faq__question {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  padding: var(--space-3) 0;
+  background: none;
+  border: none;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 1.05rem;
+  color: var(--color-ink);
+  text-align: left;
+  cursor: pointer;
+}
+
+.legal-faq__chevron {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  color: var(--color-gold-deep);
+  transition: transform var(--transition);
+}
+
+.legal-faq__item.is-open .legal-faq__chevron {
+  transform: rotate(180deg);
+}
+
+.legal-faq__answer {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 300ms ease;
+}
+
+.legal-faq__answer p {
+  padding-bottom: var(--space-3);
+  margin: 0;
+  font-size: 1rem;
+  color: var(--color-ink-soft);
+}
+
+.legal-faq__item.is-open .legal-faq__answer {
+  max-height: 320px;
+}
+
+/* Closing CTA band, ahead of the footer */
+.legal-cta {
+  text-align: center;
+  max-width: 560px;
+  margin: var(--space-6) auto 0;
+}
+
+.legal-cta h2 {
+  font-size: clamp(1.6rem, 2.8vw, 2.1rem);
+  color: var(--color-ink);
+}
+
+.legal-cta p {
+  margin-top: var(--space-2);
+  color: var(--color-ink-soft);
+}
+
+.legal-cta .btn {
+  margin-top: var(--space-4);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .legal-faq__answer {
+    transition: none;
   }
 }
 

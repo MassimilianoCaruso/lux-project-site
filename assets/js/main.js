@@ -26,80 +26,6 @@
     });
   }
 
-  // Hero scroll sequence: the house grows from the bottom while the
-  // section stays pinned, then scrolls away normally with the rest of
-  // the hero as the "Chi Siamo" section rises up to take its place.
-  var hero = document.getElementById("hero");
-  var heroPin = hero && hero.querySelector(".hero3__pin");
-  var heroHouse = hero && hero.querySelector(".hero3__house");
-  var heroContent = hero && hero.querySelector(".hero3__content");
-  var heroReduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-  if (hero && heroPin && heroHouse && heroContent && !heroReduceMotion) {
-    var heroTicking = false;
-
-    var heroClamp01 = function (v) {
-      return Math.min(Math.max(v, 0), 1);
-    };
-
-    var updateHeroScroll = function () {
-      var scrollable = hero.offsetHeight - heroPin.offsetHeight;
-      var rectTop = -hero.getBoundingClientRect().top;
-
-      var growProgress = scrollable > 0 ? heroClamp01(rectTop / scrollable) : 0;
-      var houseScale = 1.3 + growProgress * 0.7;
-      heroHouse.style.transform = "translateX(-50%) scale(" + houseScale + ")";
-
-      heroTicking = false;
-    };
-    document.addEventListener(
-      "scroll",
-      function () {
-        if (!heroTicking) {
-          window.requestAnimationFrame(updateHeroScroll);
-          heroTicking = true;
-        }
-      },
-      { passive: true }
-    );
-    updateHeroScroll();
-  }
-
-  // Mobile-only hero (separate from desktop .hero3): no scroll-pin/grow,
-  // just a light parallax drift on the house image while scrolling. The
-  // text entrance is handled by the generic .reveal observer below.
-  var heroMobile = document.getElementById("hero-mobile");
-  var heroMobileHouse = heroMobile && heroMobile.querySelector(".hero-mobile__house");
-  var heroMobileReduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-  if (heroMobile && heroMobileHouse && !heroMobileReduceMotion) {
-    var heroMobileTicking = false;
-
-    var heroMobileClamp = function (v, min, max) {
-      return Math.min(Math.max(v, min), max);
-    };
-
-    var updateHeroMobileParallax = function () {
-      if (window.innerWidth < 768) {
-        var rect = heroMobile.getBoundingClientRect();
-        var offset = heroMobileClamp(rect.top * 0.12, -50, 50);
-        heroMobileHouse.style.transform = "translateY(" + offset + "px)";
-      }
-      heroMobileTicking = false;
-    };
-    document.addEventListener(
-      "scroll",
-      function () {
-        if (!heroMobileTicking) {
-          window.requestAnimationFrame(updateHeroMobileParallax);
-          heroMobileTicking = true;
-        }
-      },
-      { passive: true }
-    );
-    updateHeroMobileParallax();
-  }
-
   // Scroll reveal
   var revealEls = document.querySelectorAll(".reveal");
   if ("IntersectionObserver" in window && revealEls.length) {
@@ -122,6 +48,44 @@
       el.classList.add("is-visible");
     });
   }
+
+  // Legal pages (Privacy/Cookie Policy): TOC scrollspy + FAQ accordion
+  var legalToc = document.querySelector(".legal-toc");
+  var legalSections = Array.prototype.slice.call(document.querySelectorAll("[data-legal-section]"));
+  if (legalToc && legalSections.length && "IntersectionObserver" in window) {
+    var tocLinks = Array.prototype.slice.call(legalToc.querySelectorAll("a"));
+    var setActiveTocLink = function (id) {
+      tocLinks.forEach(function (link) {
+        link.classList.toggle("is-active", link.getAttribute("href") === "#" + id);
+      });
+    };
+    var legalSpy = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            setActiveTocLink(entry.target.id);
+          }
+        });
+      },
+      { rootMargin: "-15% 0px -70% 0px", threshold: 0 }
+    );
+    legalSections.forEach(function (section) {
+      legalSpy.observe(section);
+    });
+    if (legalSections[0]) {
+      setActiveTocLink(legalSections[0].id);
+    }
+  }
+
+  var faqItems = document.querySelectorAll(".legal-faq__item");
+  faqItems.forEach(function (item) {
+    var question = item.querySelector(".legal-faq__question");
+    if (!question) return;
+    question.addEventListener("click", function () {
+      var isOpen = item.classList.toggle("is-open");
+      question.setAttribute("aria-expanded", isOpen ? "true" : "false");
+    });
+  });
 
   // Story stack (Caratteristiche costruttive): fanned card navigation
   var storyStacks = document.querySelectorAll("[data-story-stack]");
