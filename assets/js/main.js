@@ -10,6 +10,36 @@
   document.addEventListener("scroll", onScroll, { passive: true });
   onScroll();
 
+  // Tilt cards (Caratteristiche costruttive): subtle 3D tilt that
+  // follows the cursor, reset smoothly on mouse leave. Only wired up
+  // on real hover-capable, fine pointers (skips touch) and only if the
+  // user doesn't prefer reduced motion — otherwise the cards keep the
+  // ordinary .feature-card lift/shadow hover, untouched.
+  var tiltCards = document.querySelectorAll(".tilt-card");
+  if (
+    tiltCards.length &&
+    window.matchMedia("(hover: hover) and (pointer: fine)").matches &&
+    !window.matchMedia("(prefers-reduced-motion: reduce)").matches
+  ) {
+    var tiltMax = 8;
+    tiltCards.forEach(function (card) {
+      card.addEventListener("mousemove", function (e) {
+        var rect = card.getBoundingClientRect();
+        var px = (e.clientX - rect.left) / rect.width;
+        var py = (e.clientY - rect.top) / rect.height;
+        var ry = (px - 0.5) * tiltMax * 2;
+        var rx = -(py - 0.5) * tiltMax * 2;
+        card.style.setProperty("--rx", rx.toFixed(2) + "deg");
+        card.style.setProperty("--ry", ry.toFixed(2) + "deg");
+      });
+
+      card.addEventListener("mouseleave", function () {
+        card.style.setProperty("--rx", "0deg");
+        card.style.setProperty("--ry", "0deg");
+      });
+    });
+  }
+
   // Mobile nav toggle
   var navToggle = document.querySelector(".nav-toggle");
   var mobileNav = document.querySelector(".mobile-nav");

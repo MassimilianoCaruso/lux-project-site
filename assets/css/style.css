@@ -772,6 +772,135 @@ body.has-hero-overlay .site-header:not(.is-scrolled) .main-nav a:hover {
   color: var(--color-ink-soft);
 }
 
+/* ---------- Tilt card (Caratteristiche costruttive, index) ----------
+   A subtle 3D tilt that follows the cursor, on top of the plain
+   .feature-card lift/shadow hover. --rx/--ry are set from real cursor
+   position in main.js; JS only runs on real hover-capable pointers and
+   respects prefers-reduced-motion, so touch devices just get the
+   ordinary .feature-card hover untouched. */
+.tilt-card {
+  --rx: 0deg;
+  --ry: 0deg;
+  transform: perspective(900px) rotateX(var(--rx)) rotateY(var(--ry)) translateY(0) scale(1);
+  transition: transform 400ms cubic-bezier(0.22, 1, 0.36, 1), box-shadow var(--transition), border-color var(--transition);
+}
+
+.tilt-card:hover {
+  transform: perspective(900px) rotateX(var(--rx)) rotateY(var(--ry)) translateY(-4px) scale(1.015);
+  box-shadow: var(--shadow-soft);
+  border-color: var(--color-gold-light);
+}
+
+/* ---------- Atmosfera: full-bleed photo (index) ----------
+   A single still photo, edge-to-edge, at its own natural aspect ratio
+   (no crop, no forced height). */
+.atmosfera-section {
+  padding: 0;
+}
+
+.atmosfera-media {
+  position: relative;
+  width: 100vw;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  overflow: hidden;
+  line-height: 0;
+}
+
+.atmosfera-media img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* Generic full-bleed, natural-ratio image block — same edge-to-edge
+   technique as the "Atmosfera" photo above, reusable wherever a photo
+   needs to span the full viewport width without cropping or forcing a
+   height (e.g. Chi Siamo). */
+.full-bleed-media {
+  position: relative;
+  width: 100vw;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  overflow: hidden;
+  line-height: 0;
+}
+
+.full-bleed-media img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* ---------- Chi Siamo ----------
+   Three content blocks (philosophy split / full-bleed visual / "guarda
+   avanti" split) share one halved padding so the gap between any two
+   of them is identical (45px + 45px = 90px, half of the site's usual
+   90px + 90px between plain .section blocks). */
+.chi-siamo-block {
+  padding-top: 45px;
+  padding-bottom: 45px;
+}
+
+.chi-siamo-visual__text {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 0 1.5rem;
+  /* Nudge the centred block up slightly, off dead-centre. */
+  transform: translateY(-10%);
+}
+
+.chi-siamo-visual__text::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: rgba(20, 17, 12, 0.4);
+}
+
+.chi-siamo-visual__text h2 {
+  color: var(--color-white);
+  font-size: clamp(1.6rem, 3.6vw, 2.6rem);
+  text-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
+}
+
+.chi-siamo-visual__text p {
+  margin-top: var(--space-2);
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 1.05rem;
+  line-height: 1.5;
+  text-shadow: 0 2px 16px rgba(0, 0, 0, 0.25);
+}
+
+/* Mobile: the image is much shorter, so the upward nudge and desktop
+   text sizes leave the copy too tall to fit — keep it centred and
+   scale the type down instead. */
+@media (max-width: 700px) {
+  .chi-siamo-visual__text {
+    transform: none;
+  }
+
+  .chi-siamo-visual__text h2 {
+    font-size: 1.15rem;
+  }
+
+  .chi-siamo-visual__text p {
+    margin-top: 0.5rem;
+    font-size: 0.75rem;
+    line-height: 1.4;
+  }
+}
+
 /* Project cards */
 .project-card {
   position: relative;
@@ -923,6 +1052,190 @@ body.has-hero-overlay .site-header:not(.is-scrolled) .main-nav a:hover {
   }
 }
 
+/* ---------- Project catalog (Progetti realizzati / Lavori in corso /
+   Progetti futuri index pages) ----------
+   A scalable index-page card, bigger and richer than the homepage
+   teaser card above, two per row on desktop. Adding a project later
+   means adding one more .catalog-card block in the markup and a new
+   detail page — this grid/card CSS never needs to change. */
+.catalog-intro {
+  max-width: 640px;
+  margin: 0 auto;
+  text-align: center;
+  font-size: 1.1rem;
+  color: var(--color-ink-soft);
+}
+
+.catalog-grid {
+  display: grid;
+  gap: var(--space-5);
+}
+
+@media (min-width: 900px) {
+  .catalog-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Single-project catalogs (e.g. Progetti futuri today): centre the lone
+   card instead of stretching it across both tracks. */
+.catalog-grid--single {
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+.catalog-card {
+  display: flex;
+  flex-direction: column;
+  background: var(--color-white);
+  border: 1px solid var(--color-border);
+  transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
+}
+
+.catalog-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-soft);
+  border-color: var(--color-gold-light);
+}
+
+.catalog-card__media {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border-radius: var(--radius) var(--radius) 0 0;
+}
+
+.catalog-card__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 600ms ease;
+}
+
+.catalog-card:hover .catalog-card__media img {
+  transform: scale(1.045);
+}
+
+.catalog-card__status {
+  position: absolute;
+  top: var(--space-3);
+  left: var(--space-3);
+}
+
+.catalog-card__body {
+  padding: var(--space-4);
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.catalog-card__title {
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.4em;
+}
+
+.catalog-card__title .location-pin {
+  width: 0.68em;
+  height: 0.68em;
+  flex-shrink: 0;
+  color: var(--color-gold-deep);
+}
+
+.catalog-card__location {
+  margin-top: 0.25rem;
+  font-size: 0.9rem;
+  color: var(--color-ink-faint);
+}
+
+.catalog-card__desc {
+  margin-top: var(--space-2);
+  color: var(--color-ink-soft);
+  line-height: 1.65;
+  /* Cap at 3 lines so cards stay aligned regardless of copy length. */
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.catalog-card__tags {
+  margin-top: var(--space-3);
+  margin-bottom: var(--space-3);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.catalog-card__tags li {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-gold-deep);
+  border: 1px solid var(--color-border);
+  background: var(--color-cream-deep);
+  padding: 0.4em 0.8em;
+}
+
+.catalog-card__cta {
+  margin-top: auto;
+  align-self: flex-start;
+}
+
+/* ---------- Project detail pages ---------- */
+.specs-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-3);
+}
+
+@media (min-width: 720px) {
+  .specs-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.specs-grid__item {
+  padding: var(--space-3);
+  background: var(--color-white);
+  border: 1px solid var(--color-border);
+  text-align: center;
+}
+
+.specs-grid__item .icon {
+  width: 42px;
+  height: 42px;
+  margin: 0 auto var(--space-2);
+  border-radius: 50%;
+  border: 1px solid var(--color-gold-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-gold-deep);
+}
+
+.specs-grid__item .icon svg {
+  width: 20px;
+  height: 20px;
+}
+
+.specs-grid__item h4 {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-ink-faint);
+}
+
+.specs-grid__item p {
+  margin-top: 0.3rem;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--color-ink);
+}
+
 /* Gallery */
 .gallery {
   display: grid;
@@ -1052,6 +1365,20 @@ body.has-hero-overlay .site-header:not(.is-scrolled) .main-nav a:hover {
   #personalizza .split--reverse {
     grid-template-columns: 1fr minmax(0, calc(52% + 4.5cm));
   }
+
+  /* The bleed-right image sits close to the full-bleed photo above and
+     the "Progetti realizzati" section below — just a minimal breathing
+     gap (not the site's usual 90px), in the section's own background
+     colour, so adjacent photos never touch directly (the image's own
+     proportions and the column split above are untouched). */
+  #personalizza {
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
+
+  #progetti-realizzati {
+    padding-top: 20px;
+  }
 }
 
 .split__media {
@@ -1096,7 +1423,7 @@ body.has-hero-overlay .site-header:not(.is-scrolled) .main-nav a:hover {
   .split__media--bleed-right img {
     aspect-ratio: auto;
     object-fit: contain;
-    border-radius: var(--radius) 0 0 var(--radius);
+    border-radius: 0;
   }
 }
 
@@ -1672,7 +1999,7 @@ body.has-hero-overlay .site-header:not(.is-scrolled) .main-nav a:hover {
   font-size: clamp(2.4rem, 5.4vw, 4.5rem);
 }
 
-.page-hero--legal .page-hero__subtitle {
+.page-hero__subtitle {
   margin-top: var(--space-2);
   max-width: 620px;
   font-size: 1.1rem;
