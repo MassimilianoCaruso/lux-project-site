@@ -1,54 +1,169 @@
 /* Restyles the vanilla-cookieconsent library (assets/vendor/cookieconsent)
    to match the Lux Project design tokens defined in style.css, via the
-   library's own documented CSS custom properties. Loaded after both
-   style.css and cookieconsent.css. */
+   library's own documented CSS custom properties plus a few targeted
+   overrides for parts the library doesn't expose as variables (card
+   shadow/radius/padding, button hierarchy, close button, bottom bar
+   blur, the read-only "always on" badge). Purely presentational — no
+   consent logic lives here or in cookie-consent-config.js.
+
+   Palette is intentionally neutral (white / #E9E9E9 / #1F1F1F / #666666);
+   gold is reserved for small accents only (links, expand chevron). */
 :root {
   --cc-font-family: var(--font-body);
-  --cc-modal-border-radius: var(--radius);
-  --cc-btn-border-radius: var(--radius);
+  --cc-modal-border-radius: 16px;
+  --cc-btn-border-radius: 0;
   --cc-modal-transition-duration: var(--transition);
   --cc-z-index: 999999;
 
-  --cc-bg: var(--color-white);
-  --cc-primary-color: var(--color-ink);
-  --cc-secondary-color: var(--color-ink-soft);
+  --cc-bg: #ffffff;
+  --cc-primary-color: #1f1f1f;
+  --cc-secondary-color: #666666;
   --cc-link-color: var(--color-gold-deep);
 
-  --cc-btn-primary-bg: var(--color-gold);
-  --cc-btn-primary-color: var(--color-white);
-  --cc-btn-primary-border-color: var(--color-gold);
-  --cc-btn-primary-hover-bg: var(--color-gold-deep);
-  --cc-btn-primary-hover-color: var(--color-white);
-  --cc-btn-primary-hover-border-color: var(--color-gold-deep);
+  /* Primary CTA (Accetta tutti): near-black, the only strong button */
+  --cc-btn-primary-bg: #1f1f1f;
+  --cc-btn-primary-color: #ffffff;
+  --cc-btn-primary-border-color: #1f1f1f;
+  --cc-btn-primary-hover-bg: #000000;
+  --cc-btn-primary-hover-color: #ffffff;
+  --cc-btn-primary-hover-border-color: #000000;
 
-  --cc-btn-secondary-bg: var(--color-cream-deep);
-  --cc-btn-secondary-color: var(--color-ink);
-  --cc-btn-secondary-border-color: var(--color-border);
-  --cc-btn-secondary-hover-bg: var(--color-border);
-  --cc-btn-secondary-hover-color: var(--color-ink);
-  --cc-btn-secondary-hover-border-color: var(--color-border);
+  /* Secondary CTA (Personalizza / Salva preferenze): quiet outline */
+  --cc-btn-secondary-bg: #ffffff;
+  --cc-btn-secondary-color: #1f1f1f;
+  --cc-btn-secondary-border-color: #e9e9e9;
+  --cc-btn-secondary-hover-bg: #f7f7f7;
+  --cc-btn-secondary-hover-color: #1f1f1f;
+  --cc-btn-secondary-hover-border-color: #d8d8d8;
 
-  --cc-toggle-on-bg: var(--color-gold);
-  --cc-toggle-off-bg: var(--color-ink-faint);
-  --cc-toggle-on-knob-bg: var(--color-white);
-  --cc-toggle-off-knob-bg: var(--color-white);
-  --cc-toggle-readonly-bg: var(--color-gold-light);
-  --cc-toggle-readonly-knob-bg: var(--color-white);
+  /* Toggles: neutral ink, not gold, so an "on" switch stays sober */
+  --cc-toggle-on-bg: #1f1f1f;
+  --cc-toggle-off-bg: #d9d9d9;
+  --cc-toggle-on-knob-bg: #ffffff;
+  --cc-toggle-off-knob-bg: #ffffff;
+  --cc-toggle-readonly-bg: #ececec;
+  --cc-toggle-readonly-knob-bg: #ffffff;
 
-  --cc-separator-border-color: var(--color-border);
-  --cc-cookie-category-block-bg: var(--color-cream);
-  --cc-cookie-category-block-border: var(--color-border);
-  --cc-cookie-category-block-hover-bg: var(--color-cream-deep);
-  --cc-cookie-category-block-hover-border: var(--color-gold-light);
-  --cc-cookie-category-expanded-block-bg: var(--color-cream);
+  --cc-separator-border-color: #e9e9e9;
+  --cc-cookie-category-block-bg: #ffffff;
+  --cc-cookie-category-block-border: #e9e9e9;
+  --cc-cookie-category-block-hover-bg: #fafafa;
+  --cc-cookie-category-block-hover-border: #d8d8d8;
+  --cc-cookie-category-expanded-block-bg: #ffffff;
 
-  --cc-footer-bg: var(--color-cream);
-  --cc-footer-color: var(--color-ink-soft);
-  --cc-footer-border-color: var(--color-border);
-  --cc-overlay-bg: rgba(33, 28, 21, 0.55);
+  --cc-footer-bg: rgba(255, 255, 255, 0.7);
+  --cc-footer-color: #666666;
+  --cc-footer-border-color: #e9e9e9;
+  --cc-overlay-bg: rgba(20, 20, 20, 0.4);
 }
 
+/* Modal + card shadows: very light, never heavy */
 #cc-main .cm,
 #cc-main .pm {
-  box-shadow: var(--shadow-soft);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+}
+
+#cc-main .pm__section--toggle {
+  border-radius: 16px;
+  padding: 1.15rem 1.4rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+}
+
+/* Breathing room: title / description / sections / buttons */
+#cc-main .cm__title {
+  margin-bottom: 0.5rem;
+}
+
+#cc-main .cm__desc,
+#cc-main .pm__section-desc {
+  line-height: 1.6;
+}
+
+#cc-main .pm__section {
+  margin-bottom: 1.5rem;
+}
+
+#cc-main .pm__section-toggles > .pm__section--toggle {
+  margin-bottom: 0.75rem;
+}
+
+#cc-main .pm__section-toggles > .pm__section--toggle:last-child {
+  margin-bottom: 0;
+}
+
+/* Buttons: consistent radius/weight, colour change only on hover
+   (no lift, kept deliberately quiet) */
+#cc-main .cm__btn,
+#cc-main .pm__btn,
+#cc-main .pm__close-btn {
+  font-weight: 600;
+  transition: background-color var(--transition), border-color var(--transition), color var(--transition);
+}
+
+/* Tertiary CTA (Rifiuta): the lightest of the three, text-like */
+#cc-main .cm__btn[data-role="necessary"],
+#cc-main .pm__btn[data-role="necessary"] {
+  background: transparent;
+  color: #1f1f1f;
+  border-color: transparent;
+  box-shadow: none;
+}
+
+#cc-main .cm__btn[data-role="necessary"]:hover,
+#cc-main .pm__btn[data-role="necessary"]:hover {
+  background: #f7f7f7;
+  border-color: #e9e9e9;
+}
+
+/* Close button: white circle, grey border, black icon */
+#cc-main .pm__close-btn {
+  background: #ffffff;
+  border: 1px solid #e9e9e9;
+  color: #1f1f1f;
+}
+
+#cc-main .pm__close-btn:hover {
+  background: #f7f7f7;
+  border-color: #d8d8d8;
+}
+
+/* Bottom bar: separated from the content with a soft blur, like a
+   macOS/Safari toolbar, instead of a flat beige block */
+#cc-main .cm__btns,
+#cc-main .pm__footer {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-top: 1px solid #e9e9e9;
+}
+
+/* Small accent icons only: the expand/collapse chevron */
+#cc-main .pm__section-arrow {
+  color: var(--color-gold-deep);
+}
+
+/* Cookie tecnici is always on: replace the (disabled, non-interactive)
+   switch with a quiet "Sempre attivi" badge instead of a toggle shape */
+#cc-main .section__toggle:disabled ~ .toggle__icon {
+  display: none;
+}
+
+#cc-main .section__toggle-wrapper:has(.section__toggle:disabled) {
+  display: inline-flex;
+  align-items: center;
+}
+
+#cc-main .section__toggle-wrapper:has(.section__toggle:disabled)::after {
+  content: "Sempre attivi";
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--font-body);
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: #666666;
+  background: #f4f4f4;
+  border: 1px solid #e9e9e9;
+  border-radius: 100px;
+  padding: 0.3em 0.75em;
+  white-space: nowrap;
 }

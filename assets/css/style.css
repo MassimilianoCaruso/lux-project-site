@@ -165,7 +165,7 @@ button {
   align-items: center;
   gap: 0.6em;
   padding: 0.9em 1.7em;
-  border-radius: var(--radius);
+  border-radius: 0;
   font-weight: 600;
   font-size: 0.95rem;
   border: 1px solid transparent;
@@ -366,7 +366,7 @@ body.has-hero-overlay .site-header:not(.is-scrolled) .main-nav a:hover {
   width: 40px;
   height: 40px;
   border: 1px solid var(--color-border);
-  border-radius: var(--radius);
+  border-radius: 0;
   background: transparent;
 }
 
@@ -410,7 +410,7 @@ body.has-hero-overlay .site-header:not(.is-scrolled) .main-nav a:hover {
 }
 
 .mobile-nav a {
-  padding: 0.7rem 0;
+  padding: 0.7rem 0 0.7rem 0.5rem;
   font-weight: 600;
   border-bottom: 1px solid var(--color-border);
 }
@@ -640,6 +640,10 @@ body.has-hero-overlay .site-header:not(.is-scrolled) .main-nav a:hover {
     font-weight: 600;
     font-size: 0.95rem;
     text-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+    /* Match the primary button's own left inset (padding + border) so
+       both labels line up on the same left edge instead of the link
+       text sitting flush against the container. */
+    margin-left: calc(1.7em + 1px);
   }
 
   .hero-mobile-v2__link svg {
@@ -702,7 +706,7 @@ body.has-hero-overlay .site-header:not(.is-scrolled) .main-nav a:hover {
 }
 
 .grid-2 {
-  grid-template-columns: 1fr;
+  grid-template-columns: 1fr 1fr;
 }
 
 .grid-3 {
@@ -714,9 +718,6 @@ body.has-hero-overlay .site-header:not(.is-scrolled) .main-nav a:hover {
 }
 
 @media (min-width: 720px) {
-  .grid-2 {
-    grid-template-columns: 1fr 1fr;
-  }
   .grid-3 {
     grid-template-columns: repeat(3, 1fr);
   }
@@ -781,6 +782,24 @@ body.has-hero-overlay .site-header:not(.is-scrolled) .main-nav a:hover {
   color: var(--color-white);
 }
 
+/* Mobile: the two project photos sit side by side (see .grid-2), so the
+   tall single-column height clamp above would make them absurdly
+   elongated. Use a 4:5 photo ratio instead, matched to the narrower
+   column width. */
+@media (max-width: 719px) {
+  .project-card {
+    height: auto;
+    aspect-ratio: 4 / 5;
+  }
+
+  /* Tighter gap between the two side-by-side photos so they sit
+     slightly closer together and render a touch larger within the
+     same column width. */
+  .grid-2 {
+    gap: var(--space-2);
+  }
+}
+
 .project-card img {
   position: absolute;
   inset: 0;
@@ -819,35 +838,55 @@ body.has-hero-overlay .site-header:not(.is-scrolled) .main-nav a:hover {
   letter-spacing: 0.1em;
   text-transform: uppercase;
   padding: 0.35em 0.8em;
-  border-radius: 100px;
-  background: rgba(255, 255, 255, 0.14);
+  border-radius: 0;
+  background: rgba(20, 17, 12, 0.4);
   border: 1px solid rgba(255, 255, 255, 0.4);
   backdrop-filter: blur(4px);
-}
-
-.status-badge.is-realizzato {
-  background: rgba(169, 129, 63, 0.85);
-  border-color: var(--color-gold);
-}
-
-.status-badge.is-corso {
-  background: rgba(255, 255, 255, 0.16);
-}
-
-.status-badge.is-futuro {
-  background: rgba(20, 17, 12, 0.4);
 }
 
 .project-card__body h3 {
   margin-top: 0.5rem;
   font-size: 1.3rem;
   color: var(--color-white);
+  display: flex;
+  align-items: center;
+  gap: 0.35em;
+}
+
+.project-card__body h3 .location-pin {
+  width: 0.78em;
+  height: 0.78em;
+  flex-shrink: 0;
+  color: var(--color-gold-light);
 }
 
 .project-card__body p {
   font-size: 0.85rem;
   color: rgba(255, 255, 255, 0.8);
   margin-top: 0.2rem;
+}
+
+/* Mobile: cards are half-width (see .grid-2), so the desktop text sizes
+   above overwhelm the photo. Scale badge/title/location down to match. */
+@media (max-width: 719px) {
+  .project-card__body {
+    padding: var(--space-2);
+  }
+
+  .status-badge {
+    font-size: 0.6rem;
+    padding: 0.3em 0.6em;
+  }
+
+  .project-card__body h3 {
+    margin-top: 0.4rem;
+    font-size: 0.92rem;
+  }
+
+  .project-card__body p {
+    font-size: 0.72rem;
+    margin-top: 0.15rem;
+  }
 }
 
 /* Single-item project grid (e.g. "Progetti futuri" on homepage): center
@@ -1163,14 +1202,14 @@ body.has-hero-overlay .site-header:not(.is-scrolled) .main-nav a:hover {
 
 .story-stack__stage {
   position: relative;
-  height: calc(var(--story-card-h) + 60px);
+  height: calc(var(--story-card-h) + 120px);
   overflow: hidden;
 }
 
 .story-stack__card {
   position: absolute;
   left: 50%;
-  bottom: 0;
+  bottom: 60px;
   width: var(--story-card-w);
   height: var(--story-card-h);
   padding: var(--space-4);
@@ -1642,6 +1681,7 @@ body.has-hero-overlay .site-header:not(.is-scrolled) .main-nav a:hover {
 
 .legal-layout {
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
   gap: var(--space-4);
 }
 

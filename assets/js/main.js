@@ -115,6 +115,24 @@
       var stepDeg = maxOffset > 0 ? spreadDeg / maxOffset : 0;
       var spacing = isSmallScreen() ? 46 : 78;
 
+      // The fanned cards rotate, which widens their horizontal footprint
+      // beyond their own width. On narrow stages (mobile, or the mid-width
+      // gap where .split__media is still capped by its own max-width) the
+      // outermost cards can swing past the stage's edges and get clipped
+      // by its overflow:hidden. Shrink the spread to whatever actually
+      // fits the real measured stage width, so lateral cards are never
+      // cut off at any container size; on wide stages this fit factor is
+      // 1 and nothing changes from the original spacing/scale.
+      var cardW = cards[0].offsetWidth;
+      var cardH = cards[0].offsetHeight;
+      var rad = (spreadDeg * Math.PI) / 180;
+      var edgeScale = maxOffset > 0 ? 1 - maxOffset * 0.06 : 1;
+      var footprintHalf = edgeScale * ((cardW / 2) * Math.cos(rad) + (cardH / 2) * Math.sin(rad));
+      var requiredHalf = maxOffset * spacing + footprintHalf;
+      var availableHalf = stage.clientWidth / 2 - 4;
+      var fit = requiredHalf > 0 ? Math.min(1, availableHalf / requiredHalf) : 1;
+      var fitSpacing = spacing * fit;
+
       cards.forEach(function (card, i) {
         var offset = i - active;
         var abs = Math.abs(offset);
@@ -130,9 +148,9 @@
         }
 
         var rotate = offset * stepDeg;
-        var x = offset * spacing;
+        var x = offset * fitSpacing;
         var y = isActive ? -18 : abs * 6;
-        var scale = isActive ? 1 : 1 - abs * 0.06;
+        var scale = isActive ? 1 : (1 - abs * 0.06) * fit;
 
         card.style.pointerEvents = "";
         card.style.zIndex = String(100 - abs);
