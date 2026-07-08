@@ -730,6 +730,7 @@ body.has-hero-overlay .site-header:not(.is-scrolled) .main-nav a:hover {
 }
 
 .feature-card {
+  min-width: 0;
   padding: var(--space-3);
   background: var(--color-white);
   border: 1px solid var(--color-border);
@@ -1058,14 +1059,6 @@ body.has-hero-overlay .site-header:not(.is-scrolled) .main-nav a:hover {
    teaser card above, two per row on desktop. Adding a project later
    means adding one more .catalog-card block in the markup and a new
    detail page — this grid/card CSS never needs to change. */
-.catalog-intro {
-  max-width: 640px;
-  margin: 0 auto;
-  text-align: center;
-  font-size: 1.1rem;
-  color: var(--color-ink-soft);
-}
-
 .catalog-grid {
   display: grid;
   gap: var(--space-5);
@@ -1100,7 +1093,7 @@ body.has-hero-overlay .site-header:not(.is-scrolled) .main-nav a:hover {
 
 .catalog-card__media {
   position: relative;
-  aspect-ratio: 16 / 9;
+  aspect-ratio: 2 / 1;
   overflow: hidden;
   border-radius: var(--radius) var(--radius) 0 0;
 }
@@ -1116,14 +1109,8 @@ body.has-hero-overlay .site-header:not(.is-scrolled) .main-nav a:hover {
   transform: scale(1.045);
 }
 
-.catalog-card__status {
-  position: absolute;
-  top: var(--space-3);
-  left: var(--space-3);
-}
-
 .catalog-card__body {
-  padding: var(--space-4);
+  padding: var(--space-3);
   display: flex;
   flex-direction: column;
   flex: 1;
@@ -1149,20 +1136,9 @@ body.has-hero-overlay .site-header:not(.is-scrolled) .main-nav a:hover {
   color: var(--color-ink-faint);
 }
 
-.catalog-card__desc {
-  margin-top: var(--space-2);
-  color: var(--color-ink-soft);
-  line-height: 1.65;
-  /* Cap at 3 lines so cards stay aligned regardless of copy length. */
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
-
 .catalog-card__tags {
-  margin-top: var(--space-3);
-  margin-bottom: var(--space-3);
+  margin-top: var(--space-2);
+  margin-bottom: var(--space-2);
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
@@ -1185,16 +1161,24 @@ body.has-hero-overlay .site-header:not(.is-scrolled) .main-nav a:hover {
 }
 
 /* ---------- Project detail pages ---------- */
+/* Servizi e dotazioni (left) + Caratteristiche tecniche (right): one
+   section, two columns, stacked on mobile. */
+.project-specs {
+  display: grid;
+  gap: var(--space-5);
+}
+
+@media (min-width: 900px) {
+  .project-specs {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-6);
+  }
+}
+
 .specs-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: var(--space-3);
-}
-
-@media (min-width: 720px) {
-  .specs-grid {
-    grid-template-columns: repeat(4, 1fr);
-  }
 }
 
 .specs-grid__item {
@@ -1264,10 +1248,6 @@ body.has-hero-overlay .site-header:not(.is-scrolled) .main-nav a:hover {
 @media (min-width: 720px) {
   .gallery {
     grid-template-columns: repeat(3, 1fr);
-  }
-  .gallery a:first-child {
-    grid-column: span 2;
-    grid-row: span 2;
   }
 }
 
@@ -1367,7 +1347,7 @@ body.has-hero-overlay .site-header:not(.is-scrolled) .main-nav a:hover {
   }
 
   /* The bleed-right image sits close to the full-bleed photo above and
-     the "Progetti realizzati" section below — just a minimal breathing
+     the "Progetti Completati" section below — just a minimal breathing
      gap (not the site's usual 90px), in the section's own background
      colour, so adjacent photos never touch directly (the image's own
      proportions and the column split above are untouched). */
@@ -1376,7 +1356,7 @@ body.has-hero-overlay .site-header:not(.is-scrolled) .main-nav a:hover {
     padding-bottom: 20px;
   }
 
-  #progetti-realizzati {
+  #progetti-completati {
     padding-top: 20px;
   }
 }
@@ -1828,7 +1808,7 @@ body.has-hero-overlay .site-header:not(.is-scrolled) .main-nav a:hover {
 /* ---------- CTA banner ---------- */
 .cta-banner {
   text-align: center;
-  padding: var(--space-6) 0;
+  padding: var(--space-6) 0 var(--space-5);
 }
 
 .cta-banner h2 {
@@ -1854,7 +1834,7 @@ body.has-hero-overlay .site-header:not(.is-scrolled) .main-nav a:hover {
 .site-footer {
   background: var(--color-ink);
   color: rgba(250, 246, 238, 0.75);
-  padding: var(--space-6) 0 var(--space-3);
+  padding: var(--space-5) 0 var(--space-3);
 }
 
 .footer-grid {
