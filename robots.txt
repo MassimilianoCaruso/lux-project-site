@@ -1,0 +1,6 @@
+# Sostituire il dominio nella riga Sitemap con quello definitivo alla pubblicazione.
+
+User-agent: *
+Allow: /
+
+Sitemap: https://www.luxprojectsrl.it/sitemap.xml
