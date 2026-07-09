@@ -25,8 +25,14 @@
         <li><a href="chi-siamo.html">Chi Siamo</a></li>
         <li><a href="caratteristiche-costruttive.html">Caratteristiche</a></li>
         <li><a href="personalizza-la-tua-casa.html">Personalizza</a></li>
-        <li><a href="progetti-completati.html">Progetti</a></li>
-        <li><a href="lavori-in-corso.html">Lavori in corso</a></li>
+        <li class="has-submenu">
+          <a href="progetti-completati.html" aria-haspopup="true">Progetti</a>
+          <ul class="submenu">
+            <li><a href="progetti-completati.html">Progetti conclusi</a></li>
+            <li><a href="lavori-in-corso.html">Lavori in corso</a></li>
+            <li><a href="progetti-futuri.html">Progetti futuri</a></li>
+          </ul>
+        </li>
         <li><a href="contatti.html">Contatti</a></li>
       </ul>
     </nav>
@@ -206,7 +212,7 @@
       </div>
       <div class="grid grid-2 accordion-row reveal">
         <a class="project-card" href="progetti-completati.html#arenaccia">
-          <img src="assets/img/progetti/arenaccia/arenaccia-1.webp" alt="Residenza Arenaccia" loading="lazy" width="1600" height="2000">
+          <img src="assets/img/progetti/arenaccia/arenaccia-2.webp" alt="Residenza Arenaccia" loading="lazy" width="1600" height="2000">
           <div class="project-card__body">
             <span class="status-badge is-realizzato">Completato</span>
             <h3><svg class="location-pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s7-6.5 7-12A7 7 0 0 0 5 10c0 5.5 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></svg>Arenaccia</h3>
@@ -214,7 +220,7 @@
           </div>
         </a>
         <a class="project-card" href="progetti-completati.html#mugnano">
-          <img src="assets/img/progetti/mugnano/mugnano-1.webp" alt="Residenza a Mugnano di Napoli" loading="lazy" width="1600" height="2000">
+          <img src="assets/img/progetti/mugnano/mugnano-10.webp" alt="Residenza a Mugnano di Napoli" loading="lazy" width="1600" height="2000">
           <div class="project-card__body">
             <span class="status-badge is-realizzato">Completato</span>
             <h3><svg class="location-pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s7-6.5 7-12A7 7 0 0 0 5 10c0 5.5 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></svg>Mugnano di Napoli</h3>
@@ -241,7 +247,7 @@
       </div>
       <div class="grid grid-2 accordion-row reveal">
         <a class="project-card" href="lavori-in-corso.html#calvizzano">
-          <img src="assets/img/progetti/calvizzano/calvizzano-2.webp" alt="Cantiere Calvizzano" loading="lazy" width="1600" height="2000">
+          <img src="assets/img/progetti/calvizzano/calvizzano-1.webp" alt="Cantiere Calvizzano" loading="lazy" width="1600" height="2000">
           <div class="project-card__body">
             <span class="status-badge is-corso">In corso</span>
             <h3><svg class="location-pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s7-6.5 7-12A7 7 0 0 0 5 10c0 5.5 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></svg>Calvizzano</h3>
@@ -274,12 +280,20 @@
         <h2>Il prossimo capitolo</h2>
         <p>Le prossime residenze che stiamo progettando per chi cerca casa domani.</p>
       </div>
-      <div class="grid grid-2 reveal">
+      <div class="grid grid-2 accordion-row reveal">
         <a class="project-card" href="progetti-futuri.html#varcaturo">
           <img src="assets/img/progetti/varcaturo/varcaturo-1.webp" alt="Varcaturo" loading="lazy" width="1600" height="2000">
           <div class="project-card__body">
             <span class="status-badge is-futuro">In progettazione</span>
             <h3><svg class="location-pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s7-6.5 7-12A7 7 0 0 0 5 10c0 5.5 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></svg>Varcaturo</h3>
+            <p>Napoli</p>
+          </div>
+        </a>
+        <a class="project-card" href="progetti-futuri.html#calvizzano-2">
+          <img src="assets/img/progetti/calvizzano-2/calvizzano-2-1.webp" alt="Calvizzano" loading="lazy" width="1600" height="2000">
+          <div class="project-card__body">
+            <span class="status-badge is-futuro">In progettazione</span>
+            <h3><svg class="location-pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s7-6.5 7-12A7 7 0 0 0 5 10c0 5.5 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></svg>Calvizzano</h3>
             <p>Napoli</p>
           </div>
         </a>

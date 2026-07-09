@@ -279,6 +279,20 @@ body.has-hero-overlay .site-header:not(.is-scrolled) .main-nav a:hover {
   color: var(--color-gold-light);
 }
 
+/* The "Progetti" submenu always sits on its own solid white card, even
+   while the header itself is still transparent over the hero photo —
+   so its links keep the normal dark palette instead of inheriting the
+   white/gold-light hero-overlay colours above (which would be
+   unreadable on a white background). */
+body.has-hero-overlay .site-header:not(.is-scrolled) .main-nav .submenu a {
+  color: var(--color-ink-soft);
+}
+
+body.has-hero-overlay .site-header:not(.is-scrolled) .main-nav .submenu a:hover,
+body.has-hero-overlay .site-header:not(.is-scrolled) .main-nav .submenu a.is-active {
+  color: var(--color-gold-deep);
+}
+
 .site-header__bar {
   display: flex;
   align-items: center;
@@ -342,6 +356,60 @@ body.has-hero-overlay .site-header:not(.is-scrolled) .main-nav a:hover {
   bottom: -2px;
   height: 2px;
   background: var(--color-gold);
+}
+
+/* "Progetti" submenu: opens on hover (mouse) or focus-within (keyboard),
+   pure CSS — no JS needed since it never has to persist state. */
+.main-nav li.has-submenu {
+  position: relative;
+}
+
+.main-nav .submenu {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  min-width: 190px;
+  margin-top: 0.6rem;
+  background: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-soft);
+  overflow: hidden;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(4px);
+  transition: opacity var(--transition), transform var(--transition), visibility var(--transition);
+  z-index: 20;
+}
+
+.main-nav li.has-submenu:hover .submenu,
+.main-nav li.has-submenu:focus-within .submenu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.main-nav .submenu a {
+  display: block;
+  padding: 0.6rem 1.1rem;
+  font-size: 0.85rem;
+  white-space: nowrap;
+}
+
+.main-nav .submenu a:hover {
+  background: var(--color-cream-deep);
+  color: var(--color-gold-deep);
+}
+
+.main-nav .submenu a.is-active {
+  color: var(--color-gold-deep);
+}
+
+.main-nav .submenu a.is-active::after {
+  content: none;
 }
 
 .header-actions {
@@ -1017,18 +1085,6 @@ body.has-hero-overlay .site-header:not(.is-scrolled) .main-nav a:hover {
     font-size: 0.72rem;
     margin-top: 0.15rem;
   }
-}
-
-/* Single-item project grid (e.g. "Progetti futuri" on homepage): center
-   instead of leaving a lone card stranded next to empty grid columns. */
-#progetti-futuri .grid-2 {
-  display: flex;
-  justify-content: center;
-}
-
-#progetti-futuri .project-card {
-  width: 100%;
-  max-width: 420px;
 }
 
 /* Accordion project row (Progetti realizzati, Lavori in corso): hovering
@@ -2286,6 +2342,12 @@ body.has-hero-overlay .site-header:not(.is-scrolled) .main-nav a:hover {
   text-align: center;
   max-width: 560px;
   margin: var(--space-6) auto 0;
+}
+
+@media (min-width: 720px) {
+  .legal-cta {
+    max-width: 900px;
+  }
 }
 
 .legal-cta h2 {

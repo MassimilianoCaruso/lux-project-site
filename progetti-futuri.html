@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Progetti Futuri | Lux Project</title>
-<meta name="description" content="Le prossime residenze Lux Project in fase di progettazione: Varcaturo.">
+<meta name="description" content="Le prossime residenze Lux Project in fase di progettazione: Varcaturo e Calvizzano.">
 <link rel="icon" type="image/png" href="assets/img/logo/favicon-64.png">
 <link rel="stylesheet" href="assets/css/style.css">
 <link rel="stylesheet" href="assets/vendor/cookieconsent/cookieconsent.css">
@@ -24,8 +24,14 @@
         <li><a href="chi-siamo.html">Chi Siamo</a></li>
         <li><a href="caratteristiche-costruttive.html">Caratteristiche</a></li>
         <li><a href="personalizza-la-tua-casa.html">Personalizza</a></li>
-        <li><a href="progetti-completati.html">Progetti</a></li>
-        <li><a href="lavori-in-corso.html">Lavori in corso</a></li>
+        <li class="has-submenu">
+          <a class="is-active" href="progetti-completati.html" aria-haspopup="true">Progetti</a>
+          <ul class="submenu">
+            <li><a href="progetti-completati.html">Progetti conclusi</a></li>
+            <li><a href="lavori-in-corso.html">Lavori in corso</a></li>
+            <li><a class="is-active" href="progetti-futuri.html">Progetti futuri</a></li>
+          </ul>
+        </li>
         <li><a href="contatti.html">Contatti</a></li>
       </ul>
     </nav>
@@ -56,15 +62,32 @@
 
   <section class="section">
     <div class="container">
-      <div class="catalog-grid catalog-grid--single">
+      <div class="catalog-grid">
 
-        <!-- PROGETTO: Varcaturo — per aggiungere un nuovo progetto futuro, copia questo intero blocco <a class="catalog-card">, aggiorna contenuti/link/immagine e aggiungine uno per la pagina dedicata. Con 2+ progetti rimuovi la classe "catalog-grid--single" dal contenitore. -->
+        <!-- PROGETTO: Varcaturo — per aggiungere un nuovo progetto futuro, copia questo intero blocco <a class="catalog-card">, aggiorna contenuti/link/immagine e aggiungine uno per la pagina dedicata. -->
         <a class="catalog-card reveal" href="progetto-varcaturo.html">
           <div class="catalog-card__media">
             <img src="assets/img/progetti/varcaturo/varcaturo-1.webp" alt="Varcaturo — piscina e area relax" loading="lazy" width="1600" height="900">
           </div>
           <div class="catalog-card__body">
             <h3 class="catalog-card__title"><svg class="location-pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s7-6.5 7-12A7 7 0 0 0 5 10c0 5.5 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></svg>Varcaturo</h3>
+            <p class="catalog-card__location">Napoli</p>
+            <ul class="catalog-card__tags">
+              <li>NZEB</li>
+              <li>Piscina privata</li>
+              <li>Giardino privato</li>
+            </ul>
+            <span class="btn btn-outline catalog-card__cta">Scopri il progetto</span>
+          </div>
+        </a>
+
+        <!-- PROGETTO: Calvizzano (futuro) — attenzione: esiste anche un progetto "Calvizzano" tra i Lavori in corso (progetto-calvizzano.html); questo usa l'URL progetto-calvizzano-2.html per evitare sovrapposizioni. -->
+        <a class="catalog-card reveal" href="progetto-calvizzano-2.html">
+          <div class="catalog-card__media">
+            <img src="assets/img/progetti/calvizzano-2/calvizzano-2-1.webp" alt="Calvizzano — piscina e area relax" loading="lazy" width="1600" height="900">
+          </div>
+          <div class="catalog-card__body">
+            <h3 class="catalog-card__title"><svg class="location-pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s7-6.5 7-12A7 7 0 0 0 5 10c0 5.5 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></svg>Calvizzano</h3>
             <p class="catalog-card__location">Napoli</p>
             <ul class="catalog-card__tags">
               <li>NZEB</li>
@@ -82,8 +105,8 @@
   <section class="section section--dark cta-banner">
     <div class="container">
       <span class="eyebrow">Prenota il tuo posto</span>
-      <h2>Vuoi essere tra i primi a scoprire Varcaturo?</h2>
-      <p>Lascia i tuoi contatti: ti aggiorneremo non appena il progetto sarà pronto per essere presentato nei dettagli.</p>
+      <h2>Vuoi essere tra i primi a scoprire i nostri prossimi progetti?</h2>
+      <p style="max-width:850px;">Lascia i tuoi contatti: ti aggiorneremo non appena i progetti saranno pronti per essere presentati nei dettagli.</p>
       <div class="cta-banner__actions">
         <a class="btn btn-outline" href="contatti.html">Richiedi informazioni</a>
       </div>
