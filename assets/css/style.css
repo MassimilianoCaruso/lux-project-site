@@ -296,6 +296,22 @@ body.has-hero-overlay .site-header:not(.is-scrolled) .main-nav .submenu a.is-act
   color: var(--color-gold-deep);
 }
 
+/* Mobile only: the header keeps its usual solid cream/blur background
+   from the very first frame instead of starting transparent over the
+   hero photo (the nav-toggle icon is reset back to the normal dark
+   colour to match). Desktop keeps the transparent-until-scroll
+   behaviour above untouched. */
+@media (max-width: 959px) {
+  body.has-hero-overlay .site-header {
+    background: rgba(250, 246, 238, 0.9);
+    backdrop-filter: blur(10px);
+  }
+
+  body.has-hero-overlay .site-header:not(.is-scrolled) .nav-toggle {
+    color: var(--color-ink-soft);
+  }
+}
+
 .site-header__bar {
   display: flex;
   align-items: center;
