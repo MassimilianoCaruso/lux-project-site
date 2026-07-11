@@ -136,8 +136,6 @@ button {
   margin-top: var(--space-2);
   color: var(--color-ink-soft);
   font-size: 1.05rem;
-  text-align: justify;
-  hyphens: none;
 }
 
 .project-intro p + p {
@@ -1515,8 +1513,6 @@ body.has-hero-overlay .site-header:not(.is-scrolled) .main-nav .submenu a.is-act
 .split p {
   margin-top: var(--space-2);
   color: var(--color-ink-soft);
-  text-align: justify;
-  hyphens: none;
 }
 
 /* Story stack split (Caratteristiche costruttive): the fan needs ~870px
@@ -1570,8 +1566,6 @@ body.has-hero-overlay .site-header:not(.is-scrolled) .main-nav .submenu a.is-act
 .legal-lead {
   font-size: 1.05rem;
   color: var(--color-ink-soft);
-  text-align: justify;
-  hyphens: none;
 }
 
 .legal-content h2 {
@@ -1586,8 +1580,6 @@ body.has-hero-overlay .site-header:not(.is-scrolled) .main-nav .submenu a.is-act
 .legal-content p {
   margin-top: var(--space-2);
   color: var(--color-ink-soft);
-  text-align: justify;
-  hyphens: none;
 }
 
 .legal-content .check-list {
@@ -2211,8 +2203,6 @@ body.has-hero-overlay .site-header:not(.is-scrolled) .main-nav .submenu a.is-act
   line-height: 1.75;
   color: var(--color-ink-soft);
   margin-top: var(--space-2);
-  text-align: justify;
-  hyphens: none;
 }
 
 .legal-card .check-list {
@@ -2293,8 +2283,6 @@ body.has-hero-overlay .site-header:not(.is-scrolled) .main-nav .submenu a.is-act
   margin: 0;
   font-size: 1rem;
   color: var(--color-ink-soft);
-  text-align: justify;
-  hyphens: none;
 }
 
 /* Vertical timeline (conservazione dei dati) */
@@ -2346,8 +2334,6 @@ body.has-hero-overlay .site-header:not(.is-scrolled) .main-nav .submenu a.is-act
   margin-top: 0.2rem;
   font-size: 0.95rem;
   color: var(--color-ink-soft);
-  text-align: justify;
-  hyphens: none;
 }
 
 /* FAQ accordion */
@@ -2395,8 +2381,6 @@ body.has-hero-overlay .site-header:not(.is-scrolled) .main-nav .submenu a.is-act
   margin: 0;
   font-size: 1rem;
   color: var(--color-ink-soft);
-  text-align: justify;
-  hyphens: none;
 }
 
 .legal-faq__item.is-open .legal-faq__answer {
