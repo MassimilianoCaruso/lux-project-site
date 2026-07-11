@@ -136,6 +136,12 @@ button {
   margin-top: var(--space-2);
   color: var(--color-ink-soft);
   font-size: 1.05rem;
+  text-align: justify;
+  hyphens: none;
+}
+
+.project-intro p + p {
+  margin-top: var(--space-3);
 }
 
 .section {
@@ -336,6 +342,15 @@ body.has-hero-overlay .site-header:not(.is-scrolled) .main-nav .submenu a.is-act
 .brand img {
   height: 50px;
   width: auto;
+}
+
+/* Mobile only: nudge the header logo slightly off the left edge —
+   desktop keeps its current position untouched (the footer brand
+   lockup is intentionally not scoped by this rule). */
+@media (max-width: 959px) {
+  .site-header .brand {
+    margin-left: 0.5rem;
+  }
 }
 
 .brand span {
@@ -1288,6 +1303,20 @@ body.has-hero-overlay .site-header:not(.is-scrolled) .main-nav .submenu a.is-act
   color: var(--color-ink);
 }
 
+/* Combined "Locali" + "Bagni" card: two mini stat blocks side by side
+   inside one specs-grid tile instead of two separate tiles. Reuses
+   the existing .icon/h3/p styling above (they still match as
+   descendants), just splits the tile horizontally. */
+.specs-grid__item--split {
+  display: flex;
+  gap: var(--space-2);
+}
+
+.specs-grid__item--split > div {
+  flex: 1;
+  min-width: 0;
+}
+
 /* Gallery */
 .gallery {
   display: grid;
@@ -1486,6 +1515,8 @@ body.has-hero-overlay .site-header:not(.is-scrolled) .main-nav .submenu a.is-act
 .split p {
   margin-top: var(--space-2);
   color: var(--color-ink-soft);
+  text-align: justify;
+  hyphens: none;
 }
 
 /* Story stack split (Caratteristiche costruttive): the fan needs ~870px
@@ -1539,6 +1570,8 @@ body.has-hero-overlay .site-header:not(.is-scrolled) .main-nav .submenu a.is-act
 .legal-lead {
   font-size: 1.05rem;
   color: var(--color-ink-soft);
+  text-align: justify;
+  hyphens: none;
 }
 
 .legal-content h2 {
@@ -1553,6 +1586,8 @@ body.has-hero-overlay .site-header:not(.is-scrolled) .main-nav .submenu a.is-act
 .legal-content p {
   margin-top: var(--space-2);
   color: var(--color-ink-soft);
+  text-align: justify;
+  hyphens: none;
 }
 
 .legal-content .check-list {
@@ -1890,6 +1925,17 @@ body.has-hero-overlay .site-header:not(.is-scrolled) .main-nav .submenu a.is-act
   color: rgba(255, 255, 255, 0.8);
 }
 
+.cta-banner p.cta-banner__lead--single-line {
+  max-width: none;
+  white-space: nowrap;
+}
+
+@media (max-width: 700px) {
+  .cta-banner p.cta-banner__lead--single-line {
+    white-space: normal;
+  }
+}
+
 .cta-banner__actions {
   margin-top: var(--space-4);
   display: flex;
@@ -2165,6 +2211,8 @@ body.has-hero-overlay .site-header:not(.is-scrolled) .main-nav .submenu a.is-act
   line-height: 1.75;
   color: var(--color-ink-soft);
   margin-top: var(--space-2);
+  text-align: justify;
+  hyphens: none;
 }
 
 .legal-card .check-list {
@@ -2245,6 +2293,8 @@ body.has-hero-overlay .site-header:not(.is-scrolled) .main-nav .submenu a.is-act
   margin: 0;
   font-size: 1rem;
   color: var(--color-ink-soft);
+  text-align: justify;
+  hyphens: none;
 }
 
 /* Vertical timeline (conservazione dei dati) */
@@ -2296,6 +2346,8 @@ body.has-hero-overlay .site-header:not(.is-scrolled) .main-nav .submenu a.is-act
   margin-top: 0.2rem;
   font-size: 0.95rem;
   color: var(--color-ink-soft);
+  text-align: justify;
+  hyphens: none;
 }
 
 /* FAQ accordion */
@@ -2343,6 +2395,8 @@ body.has-hero-overlay .site-header:not(.is-scrolled) .main-nav .submenu a.is-act
   margin: 0;
   font-size: 1rem;
   color: var(--color-ink-soft);
+  text-align: justify;
+  hyphens: none;
 }
 
 .legal-faq__item.is-open .legal-faq__answer {
