@@ -1542,6 +1542,81 @@ body.has-hero-overlay .site-header:not(.is-scrolled) .main-nav .submenu a.is-act
   }
 }
 
+/* Desktop-only photo background for the "Le nostre 6 storie" text column:
+   below 1300px this column stacks full-width above the fan (plain text on
+   the page background reads fine there), so the image only makes sense
+   once the column narrows down to sit beside the fan. */
+.split--story .split__content-bg {
+  display: none;
+}
+
+@media (min-width: 1300px) {
+  /* --bleed = distance from this column's own left edge out to the actual
+     viewport edge (container's centering margin, if any, plus its own
+     padding) — same formula as .split__media--bleed-right, mirrored. */
+  .split--story .split__content {
+    --bleed: calc(max(0px, (100vw - var(--container-w)) / 2) + 1.25rem);
+    position: relative;
+    align-self: stretch;
+    z-index: 0;
+    padding: var(--space-4);
+  }
+
+  /* Image and overlay both escape the column box on 3 sides — left out to
+     the viewport edge, top/bottom out past the section's own 90px padding
+     — while staying pinned to the column's own right edge (the boundary
+     with the fan never moves). The image sits in a plain <div> wrapper
+     (not positioned directly on the <img>) because absolutely-positioned
+     replaced elements (img/video) don't reliably stretch between opposing
+     top/bottom or left/right offsets — they keep their intrinsic aspect
+     ratio instead. A non-replaced wrapper stretches normally. */
+  .split--story .split__content-bg {
+    display: block;
+    position: absolute;
+    top: -90px;
+    bottom: -90px;
+    right: 0;
+    left: calc(-1 * var(--bleed));
+    z-index: -2;
+  }
+
+  .split--story .split__content-bg img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .split--story .split__content::before {
+    content: "";
+    position: absolute;
+    top: -90px;
+    bottom: -90px;
+    right: 0;
+    left: calc(-1 * var(--bleed));
+    z-index: -1;
+    background: rgba(20, 17, 12, 0.45);
+  }
+
+  .split--story .split__content .eyebrow {
+    color: var(--color-gold-light);
+  }
+
+  .split--story .split__content .eyebrow::before {
+    background: var(--color-gold-light);
+  }
+
+  .split--story .split__content h1 {
+    color: var(--color-white);
+    text-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
+  }
+
+  .split--story .split__content p {
+    color: rgba(255, 255, 255, 0.9);
+    text-shadow: 0 2px 16px rgba(0, 0, 0, 0.25);
+  }
+}
+
 .check-list li {
   display: flex;
   align-items: flex-start;
@@ -1606,6 +1681,12 @@ body.has-hero-overlay .site-header:not(.is-scrolled) .main-nav .submenu a.is-act
   position: relative;
   height: calc(var(--story-card-h) + 120px);
   overflow: hidden;
+  /* Without this, touch browsers treat a horizontal drag across the fan
+     as an attempt to scroll the page and cancel the pointerdown/pointerup
+     sequence the swipe-to-navigate logic in main.js relies on — vertical
+     scrolling still passes through untouched, only horizontal panning is
+     handed to JS. */
+  touch-action: pan-y;
 }
 
 .story-stack__card {
@@ -1698,6 +1779,9 @@ body.has-hero-overlay .site-header:not(.is-scrolled) .main-nav .submenu a.is-act
 }
 
 .story-stack__dots button {
+  appearance: none;
+  border: none;
+  padding: 0;
   width: 8px;
   height: 8px;
   border-radius: 50%;
