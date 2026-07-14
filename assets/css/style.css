@@ -328,6 +328,7 @@ body.has-hero-overlay .site-header:not(.is-scrolled) .main-nav .submenu a.is-act
   display: flex;
   align-items: center;
   gap: var(--space-3);
+  min-width: max-content;
 }
 
 .brand {
@@ -342,12 +343,23 @@ body.has-hero-overlay .site-header:not(.is-scrolled) .main-nav .submenu a.is-act
   width: auto;
 }
 
+/* Header logo only (test): larger and wider than the footer lockup,
+   which keeps the original 50px height above via .brand img. */
+.site-header .brand img {
+  height: 64px;
+  width: auto;
+}
+
 /* Mobile only: nudge the header logo slightly off the left edge —
    desktop keeps its current position untouched (the footer brand
    lockup is intentionally not scoped by this rule). */
 @media (max-width: 959px) {
   .site-header .brand {
     margin-left: 0.5rem;
+  }
+
+  .site-header .brand img {
+    height: 48px;
   }
 }
 
@@ -364,6 +376,11 @@ body.has-hero-overlay .site-header:not(.is-scrolled) .main-nav .submenu a.is-act
 .main-nav ul {
   display: flex;
   gap: var(--space-3);
+}
+
+.main-nav ul li {
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .main-nav a {
@@ -457,6 +474,8 @@ body.has-hero-overlay .site-header:not(.is-scrolled) .main-nav .submenu a.is-act
   font-size: 0.85rem;
   font-weight: 600;
   color: var(--color-ink-soft);
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .nav-toggle {
@@ -488,13 +507,16 @@ body.has-hero-overlay .site-header:not(.is-scrolled) .main-nav .submenu a.is-act
     display: none;
   }
   .site-header__bar {
-    position: relative;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
   }
   .header-center {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
+    grid-column: 2;
+    justify-self: center;
+  }
+  .header-actions {
+    grid-column: 3;
+    justify-self: end;
   }
 }
 
@@ -551,6 +573,42 @@ body.has-hero-overlay .site-header:not(.is-scrolled) .main-nav .submenu a.is-act
     animation: none;
     opacity: 1;
     transform: none;
+  }
+}
+
+/* ---------- Hero headline-dissolve / logo-grow (shared, desktop +
+   mobile) ----------
+   ~2s after load the eyebrow+title fade out (opacity only, no layout
+   shift) and the Lux Project logo grows in over the photo in their
+   place. Buttons are untouched, on their own timing (.reveal-hero
+   above). See .hero-v2__headline/__logo and .hero-mobile-v2__headline/
+   __logo for the per-breakpoint sizing/position. */
+@keyframes hero-headline-out {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+@keyframes hero-logo-in {
+  from {
+    opacity: 0;
+    transform: scale(0.35);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-v2__headline,
+  .hero-mobile-v2__headline {
+    animation: none;
+    opacity: 1;
+  }
+
+  .hero-v2__logo,
+  .hero-mobile-v2__logo {
+    display: none;
   }
 }
 
@@ -617,6 +675,41 @@ body.has-hero-overlay .site-header:not(.is-scrolled) .main-nav .submenu a.is-act
 
   .hero-v2__content {
     max-width: 600px;
+    position: relative;
+  }
+
+  /* Headline dissolves 2s after load to make room for the logo reveal
+     below; kept in normal flow (opacity only) so the buttons under it
+     never shift position. */
+  .hero-v2__headline {
+    animation: hero-headline-out 700ms ease forwards;
+    animation-delay: 2000ms;
+  }
+
+  /* Logo grows in from nothing, overlapping the photo, once the
+     headline has fully dissolved. The wrap lives inside .hero-v2__actions
+     (absolutely positioned so it doesn't affect the buttons' flex
+     layout) and is centred on the button row itself, sitting just
+     above it — so it lines up with the two CTAs, not with the wider
+     text column. The img inside only animates scale/opacity, so the
+     growth stays perfectly centred instead of expanding from a corner. */
+  .hero-v2__logo-wrap {
+    position: absolute;
+    left: 50%;
+    bottom: calc(100% + var(--space-3));
+    width: max-content;
+    transform: translateX(-50%);
+    pointer-events: none;
+  }
+
+  .hero-v2__logo {
+    display: block;
+    width: clamp(240px, 28vw, 300px);
+    height: auto;
+    opacity: 0;
+    transform: scale(0.35);
+    animation: hero-logo-in 1100ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    animation-delay: 2600ms;
   }
 
   .hero-v2__eyebrow {
@@ -641,10 +734,12 @@ body.has-hero-overlay .site-header:not(.is-scrolled) .main-nav .submenu a.is-act
   }
 
   .hero-v2__actions {
+    position: relative;
     display: flex;
     align-items: center;
     gap: var(--space-3);
     flex-wrap: wrap;
+    width: fit-content;
     margin-top: var(--space-4);
   }
 
@@ -704,6 +799,38 @@ body.has-hero-overlay .site-header:not(.is-scrolled) .main-nav .submenu a.is-act
     padding: 90px 26px 0;
   }
 
+  /* Same headline-dissolve / logo-grow sequence as desktop (see
+     .hero-v2__headline / .hero-v2__logo above). */
+  .hero-mobile-v2__headline {
+    animation: hero-headline-out 700ms ease forwards;
+    animation-delay: 2000ms;
+  }
+
+  /* Centred on the button row itself (see .hero-v2__logo-wrap comment
+     above for why: aligns with the two CTAs, not the text column). */
+  .hero-mobile-v2__logo-wrap {
+    position: absolute;
+    left: 50%;
+    /* Smaller gap than desktop's var(--space-3): mobile has much less
+       vertical room between the (solid-background) header and the
+       button row, so this reclaims a little extra space for the logo
+       to grow into without clipping under the header. */
+    bottom: calc(100% + 12px);
+    width: max-content;
+    transform: translateX(-50%);
+    pointer-events: none;
+  }
+
+  .hero-mobile-v2__logo {
+    display: block;
+    width: clamp(155px, 43vw, 165px);
+    height: auto;
+    opacity: 0;
+    transform: scale(0.35);
+    animation: hero-logo-in 1100ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    animation-delay: 2600ms;
+  }
+
   .hero-mobile-v2__eyebrow {
     display: block;
     font-family: var(--font-body);
@@ -724,36 +851,27 @@ body.has-hero-overlay .site-header:not(.is-scrolled) .main-nav .submenu a.is-act
     text-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
   }
 
+  /* Side by side, same height (both are plain .btn now) — "Richiedi
+     informazioni" left, "Scopri i nostri progetti" right. Font/padding
+     are trimmed down from the sitewide .btn defaults so both labels
+     fit on one line without wrapping at mobile widths. */
   .hero-mobile-v2__actions {
-    margin-top: 32px;
+    position: relative;
+    margin-top: 28px;
     display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 16px;
-  }
-
-  .hero-mobile-v2__link {
-    display: inline-flex;
     align-items: center;
-    gap: 0.5em;
+    gap: 10px;
+    width: fit-content;
+  }
+
+  .hero-mobile-v2__actions .btn {
+    padding: 0.75em 0.85em;
+    font-size: 0.7rem;
+    white-space: nowrap;
+  }
+
+  .hero-mobile-v2 .btn-outline {
     color: var(--color-white);
-    font-weight: 600;
-    font-size: 0.95rem;
-    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
-    /* Match the primary button's own left inset (padding + border) so
-       both labels line up on the same left edge instead of the link
-       text sitting flush against the container. */
-    margin-left: calc(1.7em + 1px);
-  }
-
-  .hero-mobile-v2__link svg {
-    width: 1em;
-    height: 1em;
-    transition: transform var(--transition);
-  }
-
-  .hero-mobile-v2__link:hover svg {
-    transform: translateX(4px);
   }
 }
 
