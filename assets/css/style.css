@@ -738,8 +738,8 @@ body.has-hero-overlay .site-header.is-scrolled .brand img {
     font-weight: 600;
     line-height: 1.3;
     text-align: center;
-    color: var(--color-white);
-    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.25);
+    color: var(--color-gold-light);
+    text-shadow: 0 0 22px rgba(0, 0, 0, 0.4), 0 0 46px rgba(0, 0, 0, 0.25);
     opacity: 0;
     animation: hero-caption-in 700ms ease forwards;
     animation-delay: 3200ms;
@@ -885,8 +885,8 @@ body.has-hero-overlay .site-header.is-scrolled .brand img {
     font-weight: 600;
     line-height: 1.3;
     text-align: center;
-    color: var(--color-white);
-    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.25);
+    color: var(--color-gold-light);
+    text-shadow: 0 0 22px rgba(0, 0, 0, 0.4), 0 0 46px rgba(0, 0, 0, 0.25);
     opacity: 0;
     animation: hero-caption-in 700ms ease forwards;
     animation-delay: 3200ms;
