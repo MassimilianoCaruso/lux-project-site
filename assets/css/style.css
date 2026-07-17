@@ -936,6 +936,20 @@ body.has-hero-overlay .site-header.is-scrolled .brand img {
   height: auto;
 }
 
+/* Mobile only: the source photo is very wide (2.11:1) and the section
+   is already edge-to-edge (no side margins left to reclaim), so at
+   phone widths it renders as a thin strip. Crop a bit off the left and
+   right instead (object-fit:cover at a taller ratio) so the room reads
+   bigger/taller — desktop keeps the full, uncropped photo. */
+@media (max-width: 767px) {
+  .atmosfera-media img {
+    aspect-ratio: 1.7 / 1;
+    height: auto;
+    object-fit: cover;
+    object-position: center;
+  }
+}
+
 /* Generic full-bleed, natural-ratio image block — same edge-to-edge
    technique as the "Atmosfera" photo above, reusable wherever a photo
    needs to span the full viewport width without cropping or forcing a
