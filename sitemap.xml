@@ -1,97 +1,97 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-  Sostituire "https://www.luxprojectsrl.it" con il dominio definitivo
+  Sostituire "https://www.luxproject.it" con il dominio definitivo
   al momento della pubblicazione (stessa stringa usata in ogni canonical,
   Open Graph, JSON-LD e in robots.txt: trova-e-sostituisci in tutto il progetto).
 -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
   <url>
-    <loc>https://www.luxprojectsrl.it/</loc>
+    <loc>https://www.luxproject.it/</loc>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
 
   <url>
-    <loc>https://www.luxprojectsrl.it/chi-siamo.html</loc>
+    <loc>https://www.luxproject.it/chi-siamo.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.luxprojectsrl.it/caratteristiche-costruttive.html</loc>
+    <loc>https://www.luxproject.it/caratteristiche-costruttive.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.luxprojectsrl.it/personalizza-la-tua-casa.html</loc>
+    <loc>https://www.luxproject.it/personalizza-la-tua-casa.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.luxprojectsrl.it/contatti.html</loc>
+    <loc>https://www.luxproject.it/contatti.html</loc>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
   </url>
 
   <url>
-    <loc>https://www.luxprojectsrl.it/progetti.html</loc>
+    <loc>https://www.luxproject.it/progetti.html</loc>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.luxprojectsrl.it/progetti-completati.html</loc>
+    <loc>https://www.luxproject.it/progetti-completati.html</loc>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.luxprojectsrl.it/lavori-in-corso.html</loc>
+    <loc>https://www.luxproject.it/lavori-in-corso.html</loc>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.luxprojectsrl.it/progetti-futuri.html</loc>
+    <loc>https://www.luxproject.it/progetti-futuri.html</loc>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
 
   <url>
-    <loc>https://www.luxprojectsrl.it/progetto-arenaccia.html</loc>
+    <loc>https://www.luxproject.it/progetto-arenaccia.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.luxprojectsrl.it/progetto-mugnano.html</loc>
+    <loc>https://www.luxproject.it/progetto-mugnano.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.luxprojectsrl.it/progetto-calvizzano.html</loc>
+    <loc>https://www.luxproject.it/progetto-calvizzano.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.luxprojectsrl.it/progetto-secondigliano.html</loc>
+    <loc>https://www.luxproject.it/progetto-secondigliano.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.luxprojectsrl.it/progetto-varcaturo.html</loc>
+    <loc>https://www.luxproject.it/progetto-varcaturo.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.luxprojectsrl.it/progetto-calvizzano-2.html</loc>
+    <loc>https://www.luxproject.it/progetto-calvizzano-2.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
-    <loc>https://www.luxprojectsrl.it/privacy-policy.html</loc>
+    <loc>https://www.luxproject.it/privacy-policy.html</loc>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
-    <loc>https://www.luxprojectsrl.it/cookie-policy.html</loc>
+    <loc>https://www.luxproject.it/cookie-policy.html</loc>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>

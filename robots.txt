@@ -3,4 +3,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://www.luxprojectsrl.it/sitemap.xml
+Sitemap: https://www.luxproject.it/sitemap.xml
