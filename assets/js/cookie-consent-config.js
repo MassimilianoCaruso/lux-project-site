@@ -51,7 +51,7 @@
             acceptNecessaryBtn: "Rifiuta quelli non necessari",
             showPreferencesBtn: "Personalizza",
             footer:
-              '<a href="privacy-policy.html">Privacy Policy</a>\n<a href="cookie-policy.html">Cookie Policy</a>',
+              '<a href="/privacy-policy/">Privacy Policy</a>\n<a href="/cookie-policy/">Cookie Policy</a>',
           },
           preferencesModal: {
             title: "Preferenze Cookie",
@@ -63,7 +63,7 @@
               {
                 title: "Come utilizziamo i cookie",
                 description:
-                  'Puoi scegliere quali categorie di cookie accettare. I cookie tecnici restano sempre attivi perché necessari al funzionamento del sito. Per maggiori dettagli consulta la nostra <a href="cookie-policy.html">Cookie Policy</a>.',
+                  'Puoi scegliere quali categorie di cookie accettare. I cookie tecnici restano sempre attivi perché necessari al funzionamento del sito. Per maggiori dettagli consulta la nostra <a href="/cookie-policy/">Cookie Policy</a>.',
               },
               {
                 title: "Cookie tecnici",
